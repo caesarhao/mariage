@@ -25,10 +25,8 @@
   },
 
   "dependencies": {
-    "express": "~3.4.4",
-	"jquery": "*",
-	"bootstrap":"*"
-  },
+    "express": "~3.4.4"
+ },
   "devDependencies": {},
   "bundleDependencies": [],
 

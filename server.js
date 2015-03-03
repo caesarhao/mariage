@@ -38,11 +38,18 @@ var SampleApp = function() {
      */
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
+            self.zcache = { 'index.html': ''};
         }
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./views/index.html');
+        self.zcache['jquery-ui.min.css'] = fs.readFileSync('./public/stylesheets/jquery-ui.min.css');
+		self.zcache['jquery.fullPage.css'] = fs.readFileSync('./public/stylesheets/jquery.fullPage.css');
+		self.zcache['mariage.css'] = fs.readFileSync('./public/stylesheets/mariage.css');
+		self.zcache['jquery.min.js'] = fs.readFileSync('./public/javascripts/jquery.min.js');
+		self.zcache['jquery-ui.min.js'] = fs.readFileSync('./public/javascripts/jquery-ui.min.js');
+		self.zcache['jquery.fullPage.min.js'] = fs.readFileSync('./public/javascripts/jquery.fullPage.min.js');
+		self.zcache['SunnySideUp.mp3'] = fs.readFileSync('./public/musics/SunnySideUp.mp3');
     };
 
 
@@ -98,11 +105,33 @@ var SampleApp = function() {
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
-
+        self.routes['/jquery-ui.min.css'] = function(req, res) {
+			res.send(self.cache_get('jquery-ui.min.css'));
+		};
+		self.routes['/jquery.fullPage.css'] = function(req, res) {
+			res.send(self.cache_get('jquery.fullPage.css'));
+		};
+		self.routes['/mariage.css'] = function(req, res) {
+			res.send(self.cache_get('mariage.css'));
+		};
+		self.routes['/jquery.min.js'] = function(req, res) {
+			res.send(self.cache_get('jquery.min.js'));
+		};
+		self.routes['/jquery-ui.min.js'] = function(req, res) {
+			res.send(self.cache_get('jquery-ui.min.js'));
+		};
+		self.routes['/jquery.fullPage.min.js'] = function(req, res) {
+			res.send(self.cache_get('jquery.fullPage.min.js'));
+		};
+		self.routes['/SunnySideUp.mp3'] = function(req, res) {
+			res.setHeader('Content-Type', 'audio/mpeg');
+			res.send(self.cache_get('SunnySideUp.mp3'));
+		};
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+		
     };
 
 
