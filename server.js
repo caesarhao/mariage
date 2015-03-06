@@ -112,6 +112,7 @@ var SampleApp = function() {
         self.createRoutes();
         self.app = express();
 		self.app.use(express.static(__dirname + '/public'));
+		self.app.use(express.static(__dirname + '/public/fonts'));
 		self.app.use(express.static(__dirname + '/public/stylesheets'));
 		self.app.use(express.static(__dirname + '/public/javascripts'));
 		self.app.use(express.static(__dirname + '/public/images'));

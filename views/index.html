@@ -5,43 +5,100 @@
   <meta http-equiv="Content-Type" content="text/html">
   <meta name="author" content="Jungle">
   <title>Mariage de Jing et Hao</title>
-  	<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
+  	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css">
 	<link rel="stylesheet" type="text/css" href="mariage.css">
 	
 	<script type="text/javascript" src="jquery.min.js"></script>
-	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
+	
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
-				sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
-				anchors: ['page1', 'page2', 'page3', 'page4', 'lastPage'],
+				sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', 'pink'],
+				anchors: ['page1', 'page2', 'page3', 'page4'],
 				menu: '#menu',
 				css3: true,
 				scrollingSpeed: 1000
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		var centerPos=new google.maps.LatLng(44.0147149,1.588451);
+		var chateauPos=new google.maps.LatLng(44.002477,1.688451);
+		var marker;
+
+		function initialize(){
+			var mapProp = {
+		  		center:centerPos,
+		  		zoom:10,
+		  		disableDefaultUI:true,
+		  		mapTypeId:google.maps.MapTypeId.ROADMAP
+		  	};
+			var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			var marker = new google.maps.Marker({
+		  		position:chateauPos,
+		  		animation:google.maps.Animation.BOUNCE
+		 	});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 </head>
 <body>
 <ul id="menu" class="ui-menu">
-	<li data-menuanchor="page1" class="active"><a href="#page1">Page 1</a></li>
-	<li data-menuanchor="page2"><a href="#page2">Page 2</a></li>
-	<li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
-	<li data-menuanchor="page4"><a href="#page4">Page 4</a></li>
+	<li data-menuanchor="page1" class="active"><a href="#page1">Annonce</a></li>
+	<li data-menuanchor="page2"><a href="#page2">Toi et Moi</a></li>
+	<li data-menuanchor="page3"><a href="#page3">Chemin d'amour</a></li>
+	<li data-menuanchor="page4"><a href="#page4">Programme</a></li>
 </ul>
 <div id="fullpage">
 	<div class="section active" id="section1">
-		Le temps avant notre mariage<br>
-		<iframe src="countdown.html" allowtransparency="true" frameborder="0" scrolling="0" width="280" height="130"></iframe>	
+		Le temps avant notre mariage:<br>
+		<iframe src="countdown.html" allowtransparency="true" frameborder="0" scrolling="0" width="280" height="130"></iframe>
+		<h1>Nous allons nous marier!</h1>
 	</div>
-	<div class="section" id="section2">Page 2</div>
-	<div class="section" id="section3">Page 3</div>
-	<div class="section" id="section4">Page 4</div>
+	<div class="section" id="section2">
+		<div>
+			<h1>Jing</h1>
+		</div>
+		<div>
+			<h1>Hao</h1>
+		</div>
+	</div>
+	<div class="section" id="section3">
+		<div class="slide" id="slide1">
+			<h1>2011</h1>
+		</div>
+		<div class="slide" id="slide2">
+			<h1>2012</h1>
+		</div>
+		<div class="slide" id="slide3">
+			<h1>2013</h1>
+		</div>
+		<div class="slide" id="slide4">
+			<h1>2014</h1>
+		</div>
+		<div class="slide" id="slide5">
+			<h1>2015</h1>
+		</div>
+		<div class="slide" id="slide6">
+			<h1>Futur</h1>
+		</div>
+	</div>
+	<div class="section" id="section4">
+		<div>
+			<h1>Programme</h1>
+		</div>
+		<div>
+			<div id="googleMap" style="width:500px;height:380px;"></div>
+		</div>
+	</div>
 </div>
-<audio autoplay="true">
-<source src="SunnySideUp.mp3" type="audio/mpeg">
+<audio autoplay="true" loop="true">
+	<source src="SunnySideUp.mp3" type="audio/mpeg">
 </audio>
 </body>
 </html>
