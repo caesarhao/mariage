@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html">
@@ -12,8 +12,8 @@
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
-	
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
@@ -21,8 +21,41 @@
 				anchors: ['page1', 'page2', 'page3', 'page4'],
 				menu: '#menu',
 				css3: true,
-				scrollingSpeed: 1000
+				scrollingSpeed: 1000,
+				navigation: false // doesn't show navigation on the right side
 			});
+			
+		});
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var langBtns = ['selectZH', 'selectFR','selectEN'];
+			var langClasses = ['langZH', 'langFR', 'langEN'];
+			function selectLanguage(selectLang){
+				
+				$('#'+selectLang).show();
+				for (i = 0; i < langBtns.length; i++){
+					if (langBtns[i] == selectLang){
+						$('#'+langBtns[i]).removeClass('label-default');
+						$('#'+langBtns[i]).addClass('label-primary');
+						$('.'+langClasses[i]).removeClass('hide');
+					}
+					else{
+						$('#'+langBtns[i]).removeClass('label-primary');
+						$('#'+langBtns[i]).addClass('label-default');
+						$('.'+langClasses[i]).addClass('hide');
+					}
+					$('#'+langBtns[i]).show();
+					$('.'+langClasses[i]).show();
+				}
+			}
+			
+			$('.selectLanguageItem').click(function(){
+				selectLanguage($(this).attr('id'));
+			});
+			// par defaut
+			selectLanguage('selectFR');
 		});
 	</script>
 	<script type="text/javascript">
@@ -48,17 +81,42 @@
 	</script>
 </head>
 <body>
-<ul id="menu" class="ui-menu">
-	<li data-menuanchor="page1" class="active"><a href="#page1">Annonce</a></li>
-	<li data-menuanchor="page2"><a href="#page2">Toi et Moi</a></li>
-	<li data-menuanchor="page3"><a href="#page3">Chemin d'amour</a></li>
-	<li data-menuanchor="page4"><a href="#page4">Programme</a></li>
-</ul>
+	<ul id="menu" class="ui-menu">
+		<li data-menuanchor="page1" class="active"><a href="#page1">
+			<div class="langFR">Faire-Part</div>
+			<div class="langZH">公告</div>
+			<div class="langEN">Announce</div>
+		</a></li>
+		<li data-menuanchor="page2"><a href="#page2">
+			<div class="langFR">Toi et Moi</div>
+			<div class="langZH">妳和我</div>
+			<div class="langEN">You & Me</div>
+		</a></li>
+		<li data-menuanchor="page3"><a href="#page3">
+			<div class="langFR">Chemin d'amour</div>
+			<div class="langZH">爱的里程</div>
+			<div class="langEN">Way of Love</div>
+		</a></li>
+		<li data-menuanchor="page4"><a href="#page4">
+			<div class="langFR">Programme</div>
+			<div class="langZH">婚礼安排</div>
+			<div class="langEN">Schedule</div>
+		</a></li>
+	</ul>
+
+	<ul id="selectLanguage" style="position:fixed; z-index:99; top: 15px; right: 20px" class="nav nav-pills">
+		<li id="selectZH" class="selectLanguageItem label label-default">中文</li>
+		<li id="selectFR" class="selectLanguageItem label label-primary">Français</li>
+		<li id="selectEN" class="selectLanguageItem label label-default">English</li>
+	</ul>
+
 <div id="fullpage">
 	<div class="section active" id="section1">
 		Le temps avant notre mariage:<br>
 		<iframe src="countdown.html" allowtransparency="true" frameborder="0" scrolling="0" width="280" height="130"></iframe>
-		<h1>Nous allons nous marier!</h1>
+		<h1 class="langFR">Nous allons nous marier!</h1>
+		<h1 class="langZH">我们要结婚啦！</h1>
+		<h1 class="langEN">We will marriage!</h1>
 	</div>
 	<div class="section" id="section2">
 		<div>
