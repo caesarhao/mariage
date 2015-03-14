@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html">
   <meta name="author" content="Jungle">
   <title>Mariage de Jing et Hao</title>
@@ -12,6 +13,7 @@
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
+	<script type="text/javascript" src="jquery.downCount.js"></script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 	
 	<script type="text/javascript">
@@ -32,6 +34,7 @@
 		$(document).ready(function() {
 			var langBtns = ['selectZH', 'selectFR','selectEN'];
 			var langClasses = ['langZH', 'langFR', 'langEN'];
+			var langTitles = ['张浩郭静的婚礼', 'Mariage de Jing et Hao','Marriage of Jing and Hao'];
 			function selectLanguage(selectLang){
 				
 				$('#'+selectLang).show();
@@ -40,6 +43,8 @@
 						$('#'+langBtns[i]).removeClass('label-default');
 						$('#'+langBtns[i]).addClass('label-primary');
 						$('.'+langClasses[i]).removeClass('hide');
+						// also change the title
+						document.title = langTitles[i];
 					}
 					else{
 						$('#'+langBtns[i]).removeClass('label-primary');
@@ -54,10 +59,18 @@
 			$('.selectLanguageItem').click(function(){
 				selectLanguage($(this).attr('id'));
 			});
-			// par defaut
+			// francais par defaut
 			selectLanguage('selectFR');
 		});
 	</script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+        	$('.countdown').downCount({
+            	date: '05/02/2015 15:00:00',
+            	offset: 0
+        		});
+        });
+    </script>
 	<script type="text/javascript">
 		var centerPos=new google.maps.LatLng(44.0147149,1.588451);
 		var chateauPos=new google.maps.LatLng(44.002477,1.688451);
@@ -105,18 +118,67 @@
 	</ul>
 
 	<ul id="selectLanguage" style="position:fixed; z-index:99; top: 15px; right: 20px" class="nav nav-pills">
-		<li id="selectZH" class="selectLanguageItem label label-default">中文</li>
-		<li id="selectFR" class="selectLanguageItem label label-primary">Français</li>
-		<li id="selectEN" class="selectLanguageItem label label-default">English</li>
+		<li id="selectFR" class="selectLanguageItem label label-primary" style="cursor:pointer">Français</li>
+		<li id="selectZH" class="selectLanguageItem label label-default" style="cursor:pointer">中文</li>
+		<li id="selectEN" class="selectLanguageItem label label-default" style="cursor:pointer">English</li>
 	</ul>
 
 <div id="fullpage">
 	<div class="section active" id="section1">
-		Le temps avant notre mariage:<br>
-		<iframe src="countdown.html" allowtransparency="true" frameborder="0" scrolling="0" width="280" height="130"></iframe>
-		<h1 class="langFR">Nous allons nous marier!</h1>
-		<h1 class="langZH">我们要结婚啦！</h1>
-		<h1 class="langEN">We will get married!</h1>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="langFR">GUO Jing et ZHANG Hao vont se marier le 2 mai 2015 à Castres</h2>
+					<h2 class="langZH">张浩与郭静将于2015年5月2日在Castres举办婚礼</h2>
+					<h2 class="langEN">GUO Jing and ZHANG Hao will get married on May 2nd 2015 at Castres</h2>
+				</div>
+				<div class="col-md-12">
+					<h3 class="langFR">Le temps avant notre mariage:</h3>
+					<h3 class="langZH">婚礼倒计时:</h3>
+					<h3 class="langEN">The time before our marriage:</h3>
+				</div>
+				<div class="col-md-12">
+					<ul class="countdown">
+						<li>
+							<span class="days">00</span>
+							<p class="days_ref">
+								<div class="langFR">jours</div>
+								<div class="langZH">天</div>
+								<div class="langEN">days</div>
+							</p>
+						</li>
+						<li class="seperator">.</li>
+						<li>
+							<span class="hours">00</span>
+							<p class="hours_ref">
+								<div class="langFR">heures</div>
+								<div class="langZH">小时</div>
+								<div class="langEN">hours</div>
+							</p>
+						</li>
+						<li class="seperator">:</li>
+						<li>
+							<span class="minutes">00</span>
+							<p class="minutes_ref">
+								<div class="langFR">minutes</div>
+								<div class="langZH">分钟</div>
+								<div class="langEN">minutes</div>
+							</p>
+						</li>
+						<li class="seperator">:</li>
+						<li>
+							<span class="seconds">00</span>
+							<p class="seconds_ref">
+								<div class="langFR">secondes</div>
+								<div class="langZH">秒</div>
+								<div class="langEN">seconds</div>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	<div class="section" id="section2">
 		<div>
