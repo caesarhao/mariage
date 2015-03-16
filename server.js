@@ -1,6 +1,7 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var express = require('express');
+var invitation = require('./routes/invitation');
 var fs      = require('fs');
 var path	= require('path');
 /**
@@ -99,7 +100,16 @@ var SampleApp = function() {
         };
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            //res.send(self.cache_get('index.html') );
+            //res.sendfile('views/index.html');
+            res.render('index.html');
+        };
+        self.routes['/ivitation/:id'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            //res.send(self.cache_get('index.html') );
+            //res.sendfile('views/index.html');
+            var userinfo = {name: "Wang Wei"};
+            res.render('ivitation.html', userinfo);
         };
     };
 
@@ -111,13 +121,17 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express();
-		self.app.use(express.static(__dirname + '/public'));
-		self.app.use(express.static(__dirname + '/public/fonts'));
-		self.app.use(express.static(__dirname + '/public/stylesheets'));
-		self.app.use(express.static(__dirname + '/public/javascripts'));
-		self.app.use(express.static(__dirname + '/public/images'));
-		self.app.use(express.static(__dirname + '/public/musics'));
-		self.app.use(express.static(__dirname + '/views'));
+        self.app.set('views', './views');
+        self.app.set('view engine', 'ejs');
+        self.app.engine('html', require('ejs').renderFile)
+				
+		self.app.use(express.static('./public'));
+		self.app.use(express.static('./public/fonts'));
+		self.app.use(express.static('./public/stylesheets'));
+		self.app.use(express.static('./public/javascripts'));
+		self.app.use(express.static('./public/images'));
+		self.app.use(express.static('./public/musics'));
+		//self.app.use(express.static(__dirname + '/views'));
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
