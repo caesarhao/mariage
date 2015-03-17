@@ -1,7 +1,7 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var express = require('express');
-var invitation = require('./routes/invitation');
+var db = require('./routes/db');
 var fs      = require('fs');
 var path	= require('path');
 /**
