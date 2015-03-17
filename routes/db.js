@@ -4,29 +4,35 @@
 
 var mongo = require('mongodb');
 
-var isLocal = true;
 var isConnected = false;
-
-exports.setIsLocal=function(state){
-	isLocal=state;
-}
-
-exports.isLocal = function(){
-	return isLocal;
-}
 
 exports.isConnected = function(){
 	return isConnected;
 }
 
 exports.init = function(){
-	var dbServer = new mongodb.Server(process.env.OPENSHIFT_MONGODB_DB_HOST, parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT));
-	exports.Db = new mongodb.Db(process.env.OPENSHIFT_APP_NAME, dbServer, {auto_reconnect: true});
-	exports.dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
-	exports.dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
+	if (isConnected){
+		return;
+	}
+	var dbHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
+	if (dbHost === "undefined"){
+		var dbServer = new mongodb.Server('localhost', 27017);
+		exports.Db = new mongodb.Db('mariage', dbServer, {auto_reconnect: true});
+		exports.dbUser = 'admin';
+		exports.dbPass = 'admin';
+	}
+	else{
+		var dbServer = new mongodb.Server(process.env.OPENSHIFT_MONGODB_DB_HOST, parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT));
+		exports.Db = new mongodb.Db(process.env.OPENSHIFT_APP_NAME, dbServer, {auto_reconnect: true});
+		exports.dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
+		exports.dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
+	}
 }
 
 exports.connectDb = function(){
+	if (isConnected){
+		return;
+	}
 	exports.Db.open(function(err, db){
 		if(err){
 			throw err;
