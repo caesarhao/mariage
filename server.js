@@ -2,6 +2,7 @@
 //  OpenShift sample Node application
 var express = require('express');
 var db = require('./routes/db');
+var admin = require('./routes/admin');
 var fs      = require('fs');
 var path	= require('path');
 /**
@@ -43,7 +44,7 @@ var SampleApp = function() {
         }
 
         //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./views/index.html');
+        self.zcache['index.html'] = fs.readFileSync('./views/index.ejs');
     };
 
 
@@ -100,17 +101,14 @@ var SampleApp = function() {
         };
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            //res.send(self.cache_get('index.html') );
-            //res.sendfile('views/index.html');
-            res.render('index.html');
+            res.render('index');
         };
         self.routes['/ivitation/:id'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            //res.send(self.cache_get('index.html') );
-            //res.sendfile('views/index.html');
             var userinfo = {name: "Wang Wei"};
-            res.render('ivitation.html', userinfo);
+            res.render('invitation', userinfo);
         };
+        self.routes['/admin'] = admin.admin;
     };
 
 

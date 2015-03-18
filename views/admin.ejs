@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>admin of the invitees</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Current invitees: <%= invitees.length %></h2>
+					<!--TODO: a list of the current invitees, support delete -->
+					<ul>
+						<% for(var i=0; i<invitees.length; i++) { %>
+							<li>
+								<%= invitees[i] %>
+							</li>
+						<% } %>
+					</ul>
+				</div>
+				<div class="col-md-12">
+					<!--TODO: a form to add a new invitee -->
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
