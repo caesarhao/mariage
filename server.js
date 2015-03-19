@@ -109,6 +109,7 @@ var SampleApp = function() {
             res.render('invitation', userinfo);
         };
         self.routes['/admin'] = admin.admin;
+        
     };
 
 
@@ -122,6 +123,13 @@ var SampleApp = function() {
         self.app.set('views', './views');
         self.app.set('view engine', 'ejs');
         self.app.engine('html', require('ejs').renderFile)
+		
+		// parse application/x-www-form-urlencoded
+		//self.app.use(bodyParser.urlencoded({ extended: false }));
+		// parse application/json
+		//self.app.use(bodyParser.json());
+		self.app.use(express.urlencoded());
+		self.app.use(express.json());
 				
 		self.app.use(express.static('./public'));
 		self.app.use(express.static('./public/fonts'));
@@ -129,11 +137,14 @@ var SampleApp = function() {
 		self.app.use(express.static('./public/javascripts'));
 		self.app.use(express.static('./public/images'));
 		self.app.use(express.static('./public/musics'));
+		self.app.use(express.static('./public/fonts'));
 		//self.app.use(express.static(__dirname + '/views'));
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+        // post
+        self.app.post('/addInvitee', admin.addInvitee);
     };
 
 

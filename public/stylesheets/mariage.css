@@ -1,6 +1,11 @@
 
 /* Custom CSS
  * --------------------------------------- */
+@font-face {
+    font-family: LCD2U;
+    src: url(LCD2U.TTF);
+}
+
 body{
 	font-family: arial,helvetica;
 	color: #333;

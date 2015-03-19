@@ -16,13 +16,33 @@
 					<ul>
 						<% for(var i=0; i<invitees.length; i++) { %>
 							<li>
-								<%= invitees[i] %>
+								<%= invitees[i].firstname %> <%= invitees[i].lastname %>
 							</li>
 						<% } %>
 					</ul>
 				</div>
 				<div class="col-md-12">
 					<!--TODO: a form to add a new invitee -->
+					<h2>Add a new invitee:</h2>
+					<form method="post" action="/addInvitee">
+						First name:	<input type="text" name="firstname">
+						<br>
+						Last name:	<input type="text" name="lastname">
+						Language: 
+						<select name="lang">
+							<option value="FR">Français</option>
+							<option value="ZH">中文</option>
+							<option value="EN">English</option>
+						</select>
+						<br>
+						Activity to attend:
+						<select name="actType">
+							<option value="dinner">Dinner</option>
+							<option value="barbecue">Barbecue</option>
+						</select>
+						<br><br>
+						<input type="submit" value="Submit">
+					</form>
 				</div>
 			</div>
 		</div>
