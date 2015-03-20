@@ -17,23 +17,27 @@
 				<div class="col-md-12">
 					<h2>Current invitees: <%= invitees.length %></h2>
 					<!--TODO: a list of the current invitees, support delete -->
-					<table>
-						<tr>
-							<th>Lastname</th>
-							<th>Firstname</th>
-							<th>Language</th>
-							<th>Activity</th>
-							<th></th>
-						</tr>
-						<% for(var i=0; i<invitees.length; i++) { %>
+					<table class="table table-striped table-bordered">
+						<thead>
 							<tr>
-								<td><%= invitees[i].lastname %></td>
-								<td><%= invitees[i].firstname %></td>
-								<td><%= invitees[i].lang %></td>
-								<td><%= invitees[i].actType %></td>
-								<td><input type="button" onclick="location.href ='/removeInvitee/?id=<%= invitees[i]._id%>'" value="Delete"></td>
+								<th>Lastname</th>
+								<th>Firstname</th>
+								<th>Language</th>
+								<th>Activity</th>
+								<th></th>
 							</tr>
-						<% } %>
+						</thead>
+						<tbody>
+							<% for(var i=0; i<invitees.length; i++) { %>
+								<tr>
+									<td><%= invitees[i].lastname %></td>
+									<td><%= invitees[i].firstname %></td>
+									<td><%= invitees[i].lang %></td>
+									<td><%= invitees[i].actType %></td>
+									<td><input type="button" onclick="location.href ='/removeInvitee/?id=<%= invitees[i]._id%>'" value="Delete"></td>
+								</tr>
+							<% } %>
+						</tbody>
 					</table>
 				</div>
 				<div class="col-md-12">
@@ -43,6 +47,7 @@
 						First name:	<input type="text" name="firstname" required>
 						<br>
 						Last name:	<input type="text" name="lastname" required>
+						<br>
 						Language: 
 						<select name="lang" required>
 							<option value="FR">Français</option>
