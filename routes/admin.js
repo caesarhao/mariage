@@ -2,6 +2,8 @@
 * used to control the invitees 
 */
 var db = require('./db');
+var qr = require('qr-image');
+var fs = require('fs');
 
 exports.admin = function(req, res){
 	if (!req.session.user){
@@ -45,5 +47,11 @@ exports.removeInvitee = function(req, res){
 	db.Db.collection("invitees").remove({_id: db.ObjectId(p_id)});
 	//db.postUse();
 	res.redirect('/admin');
+}
+
+exports.genQR = function(id){
+	var qr_png = qr.image('https://mariage-caesarhao.rhcloud.com/invitee/?id=' + id, { type: 'png' });
+	qr_png.pipe(fs.createWriteStream('../public/images/' + id + '.png'));
+	return (id + '.png');
 }
 
