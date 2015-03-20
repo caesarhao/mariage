@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Log in to manage</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<!--TODO: a form to login -->
+					<p style="color:red"><% if(locals.message){ %> <%= message %> <% } %></p>
+					</br>
+					<form method="post" action="/auth">
+						Username:	<input type="text" name="user" required>
+						<br>
+						Password:	<input type="password" name="pwd" required>
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -1,7 +1,7 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var express = require('express');
-var db = require('./routes/db');
+var user = require('./routes/user');
 var admin = require('./routes/admin');
 var fs      = require('fs');
 var path	= require('path');
@@ -93,7 +93,7 @@ var SampleApp = function() {
     /**
      *  Create the routing table entries + handlers for the application.
      */
-    self.createRoutes = function() {
+    self.createGetRoutes = function() {
         self.routes = { };
         self.routes['/asciimo'] = function(req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
@@ -108,8 +108,11 @@ var SampleApp = function() {
             var userinfo = {name: "Wang Wei"};
             res.render('invitation', userinfo);
         };
-        self.routes['/admin'] = admin.admin;
         
+        self.routes['/login'] = user.login;
+        self.routes['/logout'] = user.logout;
+        self.routes['/admin'] = admin.admin;
+        self.routes['/removeInvitee'] = admin.removeInvitee;
     };
 
 
@@ -118,18 +121,17 @@ var SampleApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
+        self.createGetRoutes();
         self.app = express();
         self.app.set('views', './views');
         self.app.set('view engine', 'ejs');
         self.app.engine('html', require('ejs').renderFile)
 		
-		// parse application/x-www-form-urlencoded
-		//self.app.use(bodyParser.urlencoded({ extended: false }));
-		// parse application/json
-		//self.app.use(bodyParser.json());
 		self.app.use(express.urlencoded());
 		self.app.use(express.json());
+		
+		self.app.use(express.cookieParser());
+		self.app.use(express.session({secret: 'dafeafesagr42542523344hsgre'}));
 				
 		self.app.use(express.static('./public'));
 		self.app.use(express.static('./public/fonts'));
@@ -138,13 +140,17 @@ var SampleApp = function() {
 		self.app.use(express.static('./public/images'));
 		self.app.use(express.static('./public/musics'));
 		self.app.use(express.static('./public/fonts'));
+		
 		//self.app.use(express.static(__dirname + '/views'));
-        //  Add handlers for the app (from the routes).
+        //  Add get handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+        
         // post
+        self.app.post('/auth', user.auth);
         self.app.post('/addInvitee', admin.addInvitee);
+        
     };
 
 

@@ -11,37 +11,53 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
+					<h3>You have loged in as: <strong><%= user %></strong></h3> 
+					<input type="button" onclick="location.href ='/logout'" value="Logout">
+				</div>
+				<div class="col-md-12">
 					<h2>Current invitees: <%= invitees.length %></h2>
 					<!--TODO: a list of the current invitees, support delete -->
-					<ul>
+					<table>
+						<tr>
+							<th>Lastname</th>
+							<th>Firstname</th>
+							<th>Language</th>
+							<th>Activity</th>
+							<th></th>
+						</tr>
 						<% for(var i=0; i<invitees.length; i++) { %>
-							<li>
-								<%= invitees[i].firstname %> <%= invitees[i].lastname %>
-							</li>
+							<tr>
+								<td><%= invitees[i].lastname %></td>
+								<td><%= invitees[i].firstname %></td>
+								<td><%= invitees[i].lang %></td>
+								<td><%= invitees[i].actType %></td>
+								<td><input type="button" onclick="location.href ='/removeInvitee/?id=<%= invitees[i]._id%>'" value="Delete"></td>
+							</tr>
 						<% } %>
-					</ul>
+					</table>
 				</div>
 				<div class="col-md-12">
 					<!--TODO: a form to add a new invitee -->
 					<h2>Add a new invitee:</h2>
 					<form method="post" action="/addInvitee">
-						First name:	<input type="text" name="firstname">
+						First name:	<input type="text" name="firstname" required>
 						<br>
-						Last name:	<input type="text" name="lastname">
+						Last name:	<input type="text" name="lastname" required>
 						Language: 
-						<select name="lang">
+						<select name="lang" required>
 							<option value="FR">Français</option>
 							<option value="ZH">中文</option>
 							<option value="EN">English</option>
 						</select>
 						<br>
 						Activity to attend:
-						<select name="actType">
+						<select name="actType" required>
 							<option value="dinner">Dinner</option>
 							<option value="barbecue">Barbecue</option>
 						</select>
 						<br><br>
 						<input type="submit" value="Submit">
+						<input type="reset" value="Reset">
 					</form>
 				</div>
 			</div>

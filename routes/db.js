@@ -13,6 +13,8 @@ exports.isConnected = function(){
 	return isConnected;
 }
 
+exports.ObjectId = mongojs.ObjectId;
+
 exports.init = function(){
 	if (isConnected){
 		return;
@@ -44,4 +46,6 @@ exports.preUse = function(){
 exports.postUse = function(){
 	exports.disconnect();
 }
+
+
 
