@@ -14,6 +14,8 @@
 					<h3>You have loged in as: <strong><%= user %></strong></h3> 
 					<input type="button" onclick="location.href ='/logout'" value="Logout">
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-12">
 					<h2>Current invitees: <%= invitees.length %></h2>
 					<!--TODO: a list of the current invitees, support delete -->
@@ -40,7 +42,9 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-12">
+			</div>
+			<div class="row">
+				<div class="col-md-4">
 					<!--TODO: a form to add a new invitee -->
 					<h2>Add a new invitee:</h2>
 					<form role="form" method="post" action="/addInvitee">
@@ -70,6 +74,8 @@
 						<input type="submit" value="Submit">
 						<input type="reset" value="Reset">
 					</form>
+				</div>
+				<div class="col-md-8">
 				</div>
 			</div>
 		</div>
