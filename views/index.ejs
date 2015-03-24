@@ -24,7 +24,11 @@
 				menu: '#menu',
 				css3: true,
 				scrollingSpeed: 1000,
-				navigation: false // doesn't show navigation on the right side
+				navigation: false, // doesn't show navigation on the right side
+				loopBottom: false,
+				loopTop: false,
+				slidesNavigation: true,
+				loopHorizontal: false
 			});
 			
 		});
@@ -34,7 +38,7 @@
 		$(document).ready(function() {
 			var langBtns = ['selectZH', 'selectFR','selectEN'];
 			var langClasses = ['langZH', 'langFR', 'langEN'];
-			var langTitles = ['张浩郭静的婚礼', 'Mariage de Jing et Hao','Marriage of Jing and Hao'];
+			var langTitles = ['静浩之恋', 'Caesar&Serene','Jing and Hao'];
 			function selectLanguage(selectLang){
 				
 				$('#'+selectLang).show();
@@ -60,7 +64,7 @@
 				selectLanguage($(this).attr('id'));
 			});
 			// francais par defaut
-			selectLanguage('selectFR');
+			selectLanguage('selectZH');
 		});
 	</script>
 	<script type="text/javascript">
@@ -128,15 +132,26 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 class="langFR">GUO Jing et ZHANG Hao vont se marier le 2 mai 2015 à Castres</h2>
-					<h2 class="langZH">张浩与郭静将于2015年5月2日在Castres举办婚礼</h2>
-					<h2 class="langEN">GUO Jing and ZHANG Hao will get married on May 2nd 2015 at Castres</h2>
+					<h1 class="langFR">Nous allons nous marier！</h1>
+					<h1 class="langZH">我们要结婚啦！</h1>
+					<h1 class="langEN">We are getting married！</h1>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-12">
-					<h3 class="langFR">Le temps avant notre mariage:</h3>
-					<h3 class="langZH">婚礼倒计时:</h3>
-					<h3 class="langEN">The time before our marriage:</h3>
+					<h3 class="langFR">le 2 mai 2015</h3>
+					<h3 class="langZH">于公元2015年5月2日</h3>
+					<h3 class="langEN">on May 2nd 2015</h3>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="langFR">dans</h3>
+					<h3 class="langZH">距此还有</h3>
+					<h3 class="langEN">in</h3>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-12">
 					<ul class="countdown">
 						<li>
@@ -178,16 +193,35 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	<div class="section" id="section2">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6">
-					<h1>Jing</h1>
+					<h2 class="langFR">Jing</h2>
+					<h2 class="langZH">静</h2>
+					<h2 class="langEN">Jing</h2>
+					<img src="jingPortait.png" class="img-circle img-responsive">
+					<p class="langFR">
+					</p>
+					<p class="langZH">
+						
+					</p>
+					<p class="langEN">
+					</p>
 				</div>
 				<div class="col-md-6">
-					<h1>Hao</h1>
+					<h2 class="langFR">Hao</h2>
+					<h2 class="langZH">浩</h2>
+					<h2 class="langEN">Hao</h2>
+					<img src="haoPortait.png" class="img-circle img-responsive">
+					<p class="langFR">
+					</p>
+					<p class="langZH">
+						
+					</p>
+					<p class="langEN">
+					</p>
 				</div>
 			</div>
 		</div>
@@ -196,8 +230,17 @@
 		<div class="slide" id="slide1">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-						<h1>2011</h1>
+					<div class="col-md-6">
+						<img src="eagle.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-6">
+						<p class="langFR">
+						</p>
+						<p class="langZH">
+							2005年，我们一起踏入交大的校门，记忆中是那个大大的拖鞋还有那只展翅欲飞的雄鹰，还有那走不完的闵大荒。跟小伙伴们一起坐在最后一排打瞌睡的我，认识了永远坐在第一排的妳。我们都记得你的名字--“学霸”。妳也记得我们的名字：技术宅男。
+						</p>
+						<p class="langEN">
+						</p>
 					</div>
 				</div>
 			</div>
@@ -205,8 +248,17 @@
 		<div class="slide" id="slide2">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-						<h1>2012</h1>
+					<div class="col-md-6">
+						<img src="eagle.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-6">
+						<p class="langFR">
+						</p>
+						<p class="langZH">
+							2009年，妳跟小伙伴们在法国欢声笑语，感受着杜埃的那份宁静与快乐。我踌躇满志踏上了人生第一段职业历程，体会了激情，希望，伤心与失落。
+						</p>
+						<p class="langEN">
+						</p>
 					</div>
 				</div>
 			</div>
@@ -214,8 +266,17 @@
 		<div class="slide" id="slide3">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-						<h1>2013</h1>
+					<div class="col-md-6">
+						<img src="apple.png" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-6">
+						<p class="langFR">
+						</p>
+						<p class="langZH">
+							2011年，妳回到了交大，我也回到了交大。妳继续妳的学业，我去寻找我曾经的梦想。我们再一次认识对方，拥有了彼此真正的名字。我鼓起勇气，拉起妳的手，一起踏上追梦的路程。每个周末陪着妳玩Matlab，看美剧，吃食堂，准备GEM考试。
+						</p>
+						<p class="langEN">
+						</p>
 					</div>
 				</div>
 			</div>
@@ -223,8 +284,17 @@
 		<div class="slide" id="slide4">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-						<h1>2014</h1>
+					<div class="col-md-6">
+						<img src="lake.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-6">
+						<p class="langFR">
+						</p>
+						<p class="langZH">
+							2012年，陪伴妳坐在思源湖边，一起毕业。
+						</p>
+						<p class="langEN">
+						</p>
 					</div>
 				</div>
 			</div>
@@ -232,8 +302,17 @@
 		<div class="slide" id="slide5">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-						<h1>2015</h1>
+					<div class="col-md-6">
+						<img src="paris.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-6">
+						<p class="langFR">
+						</p>
+						<p class="langZH">
+							2012年10月，经历过无数让我习以为常的波折后，我们成功在巴黎会师啦。
+						</p>
+						<p class="langEN">
+						</p>
 					</div>
 				</div>
 			</div>
@@ -242,7 +321,89 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>Futur</h1>
+						<h3 class="langFR">2012-3</h3>
+						<h1 class="langZH">第一次离别，痛彻心扉。经过两个月“漫长”的异地煎熬，你也顺利来到法国和我会师，我们开始新篇章的第一步</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide7">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2013-1</h3>
+						<h1 class="langZH">饱受异地折磨，终于可以趁实习时暂时在一起。</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide8">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2013-2</h3>
+						<h1 class="langZH">那个晴朗的夏日，我们在湖里蹬着脚踏船，嬉笑打闹。</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide9">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2013-3</h3>
+						<h1 class="langZH">第一次离别，痛彻心扉。经过两个月“漫长”的异地煎熬，你也顺利来到法国和我会师，我们开始新篇章的第一步</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide10">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2014-1</h3>
+						<h1 class="langZH">2012年 陪你走过毕业季，也穿着硕士服再做次同学</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide11">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2014-2</h3>
+						<h1 class="langZH">之后我密集的学法语和办签证，你也煞费苦心的开始申请学校。发生了很多事情</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide12">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="langFR">2014-3</h3>
+						<h1 class="langZH">第一次离别，痛彻心扉。经过两个月“漫长”的异地煎熬，你也顺利来到法国和我会师，我们开始新篇章的第一步</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide13">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>2015</h1>
+						<h3 class="langZH">从2005年在美丽的交大校园相遇到2015年，我们已有十年的人生轨迹重合，而这只是开始。</h3>
+						<h3 class="langZH">我们结婚了！邀请亲朋好友分享我们的喜悦。</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide14">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="langFR">Futur</h1>
+						<h1 class="langZH">拉紧的手从此不放开。未来的每一天，我都与你同在。</h1>
 					</div>
 				</div>
 			</div>
@@ -271,7 +432,7 @@
 	</div>
 </div>
 <audio autoplay="true" loop="true">
-	<source src="SunnySideUp.mp3" type="audio/mpeg">
+	<source src="SunnySideUp+.mp3" type="audio/mpeg">
 </audio>
 </body>
 </html>

@@ -11,6 +11,11 @@ body{
 	color: #333;
 	color: rgba(0,0,0,0.5);
 }
+p{
+	color: #fff;
+	text-align:left;
+	font-size: 2em;
+}
 .wrap{
 	margin-left: auto;
 	margin-right: auto;
@@ -19,6 +24,15 @@ body{
 }
 .section{
 	text-align:center;
+	padding:10px 10px 10px 10px;
+}
+.slide{
+	text-align:center;
+	/*padding:50px 50px 10px 50px;  top right bottom left */
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    padding-left: 50px;
 }
 #menu li {
 	display:inline-block;
@@ -113,6 +127,11 @@ body{
 	border-radius: 50%;
 	position: absolute;
 	z-index: 1;
+}
+#section1{
+	background-image: url("bg.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 ul.countdown {
 list-style: none;
