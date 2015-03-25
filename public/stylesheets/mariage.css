@@ -11,6 +11,18 @@ body{
 	color: #333;
 	color: rgba(0,0,0,0.5);
 }
+h1{
+	color:white;
+}
+h2{
+	color:white;
+}
+h3{
+	color:white;
+}
+h4{
+	color:white;
+}
 p{
 	color: #fff;
 	text-align:left;
@@ -142,6 +154,7 @@ text-align: center;
 }
 ul.countdown li {
 display: inline-block;
+	color:white;
 }
 ul.countdown li span {
 font-size: 80px;

@@ -3,6 +3,7 @@
 var express = require('express');
 var user = require('./routes/user');
 var admin = require('./routes/admin');
+var invitation = require('./routes/invitation');
 var fs      = require('fs');
 var path	= require('path');
 /**
@@ -103,16 +104,15 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.render('index');
         };
-        self.routes['/ivitation/:id'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            var userinfo = {name: "Wang Wei"};
-            res.render('invitation', userinfo);
-        };
+        
         
         self.routes['/login'] = user.login;
         self.routes['/logout'] = user.logout;
         self.routes['/admin'] = admin.admin;
         self.routes['/removeInvitee'] = admin.removeInvitee;
+        self.routes['/downloadQR'] = admin.downloadQR;
+        
+        self.routes['/invitation'] = invitation.invitation;
     };
 
 
