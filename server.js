@@ -110,6 +110,8 @@ var SampleApp = function() {
         self.routes['/logout'] = user.logout;
         self.routes['/admin'] = admin.admin;
         self.routes['/removeInvitee'] = admin.removeInvitee;
+        self.routes['/removeAllInvitees'] = admin.removeAllInvitees;
+        
         self.routes['/downloadQR'] = admin.downloadQR;
         
         self.routes['/invitation'] = invitation.invitation;

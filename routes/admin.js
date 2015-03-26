@@ -59,6 +59,23 @@ exports.removeInvitee = function(req, res){
 	res.redirect('/admin');
 }
 
+exports.removeAllInvitees = function(req, res){
+	db.preUse();
+	db.Db.collection("invitees").find({}, function(err, result){
+		if(!err){
+			var i = 0;
+			for (i = 0; i < result.length; i++){
+				db.Db.collection("invitees").remove({_id: db.ObjectId(result[i]._id)});
+				//remove qrcode too.
+				exports.removeQR(result[i]._id);
+			}
+		}
+	});
+	
+	res.redirect('/admin');
+}
+
+
 exports.downloadQR = function(req, res){
 	var p_id = req.param('id');
 	var firstname = 'Anonyme';
@@ -71,6 +88,9 @@ exports.downloadQR = function(req, res){
 	var fullPath = 'public/images/qrs/' + p_id + '.png';
 	fs.exists(fullPath, 
 		function(exists){
+			if(!exists){
+				exports.genQR(p_id);
+			}
 			if(exists){
 				res.download(fullPath, firstname + '.png', function(err){});
 			}
@@ -79,7 +99,7 @@ exports.downloadQR = function(req, res){
 }
 
 exports.genQR = function(id){
-	var qr_png = qr.image('http://mariage-caesarhao.rhcloud.com/invitee/?id=' + id, { type: 'png' });
+	var qr_png = qr.image('http://mariage-caesarhao.rhcloud.com/invitation?id=' + id, { type: 'png' });
 	qr_png.pipe(fs.createWriteStream('public/images/qrs/' + id + '.png'));
 	return (id + '.png');
 }

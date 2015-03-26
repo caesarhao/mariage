@@ -17,7 +17,8 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Current invitees: <%= invitees.length %></h2>
+					<h2>Current invitees: <%= invitees.length %> </h2>
+					<input type="button" onclick="location.href ='/removeAllInvitees'" value="Delete All Invitees">
 					<!--DONE: a list of the current invitees, support delete, download QRcode -->
 					<table class="table table-striped table-bordered">
 						<thead>
@@ -37,8 +38,8 @@
 									<td><%= invitees[i].firstname %></td>
 									<td><%= invitees[i].lang %></td>
 									<td><%= invitees[i].actType %></td>
-									<td><input type="button" onclick="location.href ='/removeInvitee/?id=<%= invitees[i]._id%>'" value="Delete"></td>
-									<td><input type="button" onclick="location.href ='/downloadQR/?id=<%= invitees[i]._id%>'" value="DownloadQRcode"></td>
+									<td><input type="button" onclick="location.href ='/removeInvitee?id=<%= invitees[i]._id%>'" value="Delete"></td>
+									<td><input type="button" onclick="location.href ='/downloadQR?id=<%= invitees[i]._id%>'" value="DownloadQRcode"></td>
 								</tr>
 							<% } %>
 						</tbody>

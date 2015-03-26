@@ -1,0 +1,16 @@
+/* Invitation */
+
+body{
+    overflow:hidden;
+}
+
+#invitation .page{
+    
+    background-color:red;
+    line-height:300px;
+    font-size:20px;
+    text-align:center;
+}
+
+
+

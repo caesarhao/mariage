@@ -1,64 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta name="viewport" content="width = 1050, user-scalable = no" />
+  	<title>Invitation</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="invitation.css">
 		
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="turn.min.js"></script>
-	<script type="text/javascript" src="modernizr.2.5.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+        	$('#invitation').turn({
+            	width: 600,
+  				height: 600,
+  				autoCenter: true
+           });
+    	});
+    	$(document).bind('keydown', function(e){ 
+        	if (e.keyCode==37)
+            	$('#invitation').turn('previous');
+        	else if (e.keyCode==39)
+            	$('#invitation').turn('next');
+             
+    	});
+    </script>
 </head>
 <body>
-	<div class="flipbook-viewport">
-		<div class="container">
-			<div class="flipbook">
-				<div style="background-image:url(cover1.jpg)"></div>
-				<div>Page 2</div>
-				<div>Page 3</div>
-				<div style="background-image:url(cover2.jpg)"></div>
+	<div class="flipbook">
+		<div id="invitation">
+			<div id="cover1" class="hard" style="background-image:url(cover1.jpg); background-size:100% 100%"></div>
+			<div id="page1">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							firstname: <%= invitee.firstname %>
+						</div>
+						<div class="col-md-6">
+							lastname: <%= invitee.lastname %>
+						</div>
+						<div class="col-md-6">
+							lang: <%= invitee.lang %>
+						</div>
+						<div class="col-md-6">
+							actType: <%= invitee.actType %>
+						</div>
+					</div>
+				</div>
 			</div>
+			<div id="page2">Page 2</div>
+			<div id="cover2" class="hard" style="background-image:url(cover2.jpg); background-size:100% 100%"></div>
 		</div>
 	</div>
-	<script type="text/javascript">
-
-		function loadApp() {
-
-		// Create the flipbook
-
-			$('.flipbook').turn({
-				// Width
-
-				width:922,
-			
-				// Height
-
-				height:600,
-
-				// Elevation
-
-				elevation: 50,
-			
-				// Enable gradients
-
-				gradients: true,
-			
-				// Auto center this flipbook
-
-				autoCenter: true
-
-			});
-		}
-		// Load the HTML4 version if there's not CSS transform
-
-		yepnope({
-			test : Modernizr.csstransforms,
-			yep: ['turn.js'],
-			nope: ['turn.html4.min.js'],
-			both: ['css/basic.css'],
-			complete: loadApp
-		});
-	</script>
 </body>
 </html>
 
