@@ -78,14 +78,12 @@ exports.removeAllInvitees = function(req, res){
 
 exports.downloadQR = function(req, res){
 	var p_id = req.param('id');
-	var finish = false;
 	var firstname = 'Anonyme';
 	db.preUse();
 	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err, result){
 		if(!err){
 			firstname = result[0].firstname;
 		}
-		finish = true;
 	});
 	var fullPath = 'public/images/qrs/' + p_id + '.png';
 	fs.exists(fullPath, 
@@ -93,10 +91,7 @@ exports.downloadQR = function(req, res){
 			if(!exists){
 				exports.genQR(p_id);
 			}
-			if(exists){
-				while(!finish){};
-				res.download(fullPath, firstname + '.png', function(err){});
-			}
+			res.download(fullPath, firstname + '.png', function(err){});
 		}
 	);
 }
