@@ -12,11 +12,10 @@ exports.admin = function(req, res){
 	}
 	//DONE: get currentInvitees from db.
 	db.preUse();
-	//var currentInvitees = {invitees: ["Wang Wei", "Lin Tingting"]};
-	db.Db.collection("invitees").find({}, function(err, result){
-		//console.log(result);
-		res.render('admin', {user: req.session.user, invitees: result});
-		//db.postUse();
+	db.Db.collection("invitees").find({}, function(err, result1){
+		db.Db.collection("presents").find({}, function(err, result2){
+			res.render('admin', {user: req.session.user, invitees: result1, presents:result2});
+		});
 	});
 }
 /**
@@ -42,11 +41,12 @@ exports.addInvitee = function(req, res){
 			//DONE: create QRcode here with saved, saved is the new record.
 			if(!err){
 				exports.genQR(saved._id);
+				res.redirect('/admin');
 			}
 		}
 	);
 	//db.postUse();
-	res.redirect('/admin');
+	
 }
 
 exports.removeInvitee = function(req, res){
@@ -117,5 +117,46 @@ exports.removeQR = function(id){
 			}
 		}
 	);
+}
+
+/**
+* present structure in collection presents
+ {
+ 	_id: Int,
+ 	nameZH: String,
+ 	nameFR: String,
+ 	price: Float
+ }
+*/
+exports.addPresent = function(req, res){
+	db.preUse();
+	var p_nameZH = req.param('nameZH');
+	var p_nameFR = req.param('nameFR');
+	var p_price = req.param('price');
+	var p_split = req.param('split');
+	var newPresents=new Array();
+	if (1 == p_split){
+		newPresents.push({nameZH: p_nameZH, nameFR: p_nameFR, price: p_price});
+	}
+	else{
+		for (var i = 0; i < p_split; i++){
+			newPresents.push({nameZH: p_nameZH+'_'+i, nameFR: p_nameFR+'_'+i, price: p_price/p_split});
+		}
+	}
+	db.Db.collection("presents").insert(newPresents, 
+		function(err, saved){
+			//DONE:.
+			if(!err){
+				res.redirect('/admin');
+			}
+		}
+	);
+}
+
+exports.removePresent = function(req, res){
+	db.preUse();
+	var p_id = req.param('id');
+	db.Db.collection("presents").remove({_id: db.ObjectId(p_id)});
+	res.redirect('/admin');
 }
 

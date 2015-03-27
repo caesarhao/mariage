@@ -110,6 +110,7 @@ var SampleApp = function() {
         self.routes['/logout'] = user.logout;
         self.routes['/admin'] = admin.admin;
         self.routes['/removeInvitee'] = admin.removeInvitee;
+        self.routes['/removePresent'] = admin.removePresent;
         self.routes['/removeAllInvitees'] = admin.removeAllInvitees;
         
         self.routes['/downloadQR'] = admin.downloadQR;
@@ -152,6 +153,7 @@ var SampleApp = function() {
         // post
         self.app.post('/auth', user.auth);
         self.app.post('/addInvitee', admin.addInvitee);
+        self.app.post('/addPresent', admin.addPresent);
         
     };
 

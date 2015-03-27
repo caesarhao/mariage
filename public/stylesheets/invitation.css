@@ -5,11 +5,14 @@ body{
 }
 
 #invitation .page{
-    
     background-color:red;
-    line-height:300px;
-    font-size:20px;
-    text-align:center;
+    line-height:1em;
+    font-size:2em;
+    text-align:left;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
 }
 
 

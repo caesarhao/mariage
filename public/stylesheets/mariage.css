@@ -157,17 +157,17 @@ display: inline-block;
 	color:white;
 }
 ul.countdown li span {
-font-size: 80px;
+font-size: 5em;
 font-weight: 300;
-line-height: 80px;
+line-height: 1em;
 }
 ul.countdown li.seperator {
-font-size: 80px;
-line-height: 70px;
+font-size: 5em;
+line-height: 1em;
 vertical-align: top;
 }
 ul.countdown li p {
 color: #a7abb1;
-font-size: 14px;
+font-size: 1em;
 }
 

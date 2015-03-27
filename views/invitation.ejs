@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta name="author" content="Jungle">
   	<title>Invitation</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="invitation.css">
@@ -11,7 +15,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
         	$('#invitation').turn({
-            	width: 600,
+            	width: 700,
   				height: 600,
   				autoCenter: true
            });
@@ -47,7 +51,32 @@
 					</div>
 				</div>
 			</div>
-			<div id="page2">Page 2</div>
+			<div id="page2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<h2>Select a present for us:</h2>
+							<form role="form" method="post" action="/selectPresent">
+								<div class="form-group">
+									<label class="hide" for="id">id</label>
+									<input class="hide" type="text" id="id" class="form-control" name="id" value='<%= invitee._id %>' >
+								</div>
+								<div class="form-group">
+									<label for="present">Present:</label>
+									<select id="present" class="form-control" name="present" required>
+										<% for(var i=0; i<presents.length; i++) { %>
+											<option value='<%= i._id %>'><%= i.nameZH %> + <%= i.price %> + '(€)'</option>
+										<% } %>
+									</select>
+								</div>
+								<input type="submit" value="Ok">
+							</form>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="cover2" class="hard" style="background-image:url(cover2.jpg); background-size:100% 100%"></div>
 		</div>
 	</div>
