@@ -83,17 +83,19 @@ exports.downloadQR = function(req, res){
 	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err, result){
 		if(!err){
 			firstname = result[0].firstname;
+			//console.log(firstname);
+			var fullPath = 'public/images/qrs/' + p_id + '.png';
+			fs.exists(fullPath, 
+				function(exists){
+					if(!exists){
+						exports.genQR(p_id);
+					}
+					return res.download(fullPath, encodeURIComponent(firstname + '.png'), function(err){});
+				}
+			);
 		}
 	});
-	var fullPath = 'public/images/qrs/' + p_id + '.png';
-	fs.exists(fullPath, 
-		function(exists){
-			if(!exists){
-				exports.genQR(p_id);
-			}
-			res.download(fullPath, firstname + '.png', function(err){});
-		}
-	);
+	res.redirect('/admin');
 }
 
 exports.genQR = function(id){
