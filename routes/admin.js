@@ -5,11 +5,15 @@ var db = require('./db');
 var qr = require('qr-image');
 var fs = require('fs');
 
-exports.admin = function(req, res){
+function checkLogin(req, res){
 	if (!req.session.user){
 		res.redirect('/login');
 		return;
 	}
+}
+
+exports.admin = function(req, res){
+	checkLogin(req, res);
 	//DONE: get currentInvitees from db.
 	db.preUse();
 	db.Db.collection("invitees").find({}, function(err, result1){
@@ -30,6 +34,7 @@ exports.admin = function(req, res){
 */
 
 exports.addInvitee = function(req, res){
+	checkLogin(req, res);
 	db.preUse();
 	var p_firstname = req.param('firstname');
 	var p_lastname = req.param('lastname');
@@ -50,6 +55,7 @@ exports.addInvitee = function(req, res){
 }
 
 exports.removeInvitee = function(req, res){
+	checkLogin(req, res);
 	db.preUse();
 	var p_id = req.param('id');
 	db.Db.collection("invitees").remove({_id: db.ObjectId(p_id)});
@@ -60,6 +66,7 @@ exports.removeInvitee = function(req, res){
 }
 
 exports.removeAllInvitees = function(req, res){
+	checkLogin(req, res);
 	db.preUse();
 	db.Db.collection("invitees").find({}, function(err, result){
 		if(!err){
@@ -71,7 +78,6 @@ exports.removeAllInvitees = function(req, res){
 			}
 		}
 	});
-	
 	res.redirect('/admin');
 }
 
@@ -90,12 +96,11 @@ exports.downloadQR = function(req, res){
 					if(!exists){
 						exports.genQR(p_id);
 					}
-					return res.download(fullPath, encodeURIComponent(firstname + '.png'), function(err){});
+					res.download(fullPath, encodeURIComponent(firstname + '.png'), function(err){});
 				}
 			);
 		}
 	});
-	res.redirect('/admin');
 }
 
 exports.genQR = function(id){
@@ -129,6 +134,7 @@ exports.removeQR = function(id){
  }
 */
 exports.addPresent = function(req, res){
+	checkLogin(req, res);
 	db.preUse();
 	var p_nameZH = req.param('nameZH');
 	var p_nameFR = req.param('nameFR');
@@ -140,7 +146,7 @@ exports.addPresent = function(req, res){
 	}
 	else{
 		for (var i = 0; i < p_split; i++){
-			newPresents.push({nameZH: p_nameZH+'_'+i, nameFR: p_nameFR+'_'+i, price: p_price/p_split});
+			newPresents.push({nameZH: p_nameZH+'_'+i, nameFR: p_nameFR+'_'+i, price: (p_price/p_split).toFixed(2)});
 		}
 	}
 	db.Db.collection("presents").insert(newPresents, 
@@ -154,6 +160,7 @@ exports.addPresent = function(req, res){
 }
 
 exports.removePresent = function(req, res){
+	checkLogin(req, res);
 	db.preUse();
 	var p_id = req.param('id');
 	db.Db.collection("presents").remove({_id: db.ObjectId(p_id)});

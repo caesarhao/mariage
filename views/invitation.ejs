@@ -19,6 +19,13 @@
   				height: 600,
   				autoCenter: true
            });
+           
+           if ('ZH' == '<%= invitee.lang %>'){
+           		$(".langFR").addClass('hide').show();
+           }
+           else{
+           		$(".langZH").addClass('hide').show();
+           }
     	});
     	$(document).bind('keydown', function(e){ 
         	if (e.keyCode==37)
@@ -36,17 +43,21 @@
 			<div id="page1">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-6">
-							firstname: <%= invitee.firstname %>
-						</div>
-						<div class="col-md-6">
-							lastname: <%= invitee.lastname %>
-						</div>
-						<div class="col-md-6">
-							lang: <%= invitee.lang %>
-						</div>
-						<div class="col-md-6">
-							actType: <%= invitee.actType %>
+						<div class="col-md-12">
+							<div class="langZH" style="writing-mode:vertical-rl;">
+								<h3>送呈 <%= invitee.lastname %> <%= invitee.firstname %> 亲启</h3>
+								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）在Castres举行结婚典礼敬备喜筵！
+								</p>
+								<p>恭请光临
+								</p>
+							</div>
+							<div class="langFR" style="layout-flow: vertical-ideographic;">
+								<h3 style="layout-flow: vertical-ideographic">送呈 <%= invitee.lastname %> <%= invitee.firstname %> 亲启</h3>
+								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）在Castres举行结婚典礼敬备喜筵！
+								</p>
+								<p>恭请光临
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -55,17 +66,19 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Select a present for us:</h2>
+							<h5 class="langZH">送个礼物:</h5>
+							<h5 class="langFR">Un cadeau:</h5>
 							<form role="form" method="post" action="/selectPresent">
 								<div class="form-group">
 									<label class="hide" for="id">id</label>
 									<input class="hide" type="text" id="id" class="form-control" name="id" value='<%= invitee._id %>' >
 								</div>
 								<div class="form-group">
-									<label for="present">Present:</label>
+									<label for="present" class="langFR">Choisissez un cadeau pour nous, si vous voulez:</label>
+									<label for="present" class="langZH">给我们选个礼物吧:</label>
 									<select id="present" class="form-control" name="present" required>
-										<% for(var i=0; i<presents.length; i++) { %>
-											<option value='<%= i._id %>'><%= i.nameZH %> + <%= i.price %> + '(€)'</option>
+										<% for(var i=0; i < presents.length; i++) { %>
+											<option value='<%= presents[i]._id %>'><%= 'ZH' == invitee.lang ? presents[i].nameZH:presents[i].nameFR %> (<%= presents[i].price %> €)</option>
 										<% } %>
 									</select>
 								</div>

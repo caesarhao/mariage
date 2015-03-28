@@ -3,6 +3,31 @@
 body{
     overflow:hidden;
 }
+h1{
+	font-size: 3em;
+	color:white;
+}
+h2{
+	font-size: 2.5em;
+	color:white;
+}
+h3{
+	font-size: 2em;
+	color:white;
+}
+h4{
+	font-size: 1.5em;
+	color:white;
+}
+h5{
+	font-size: 1em;
+	color:white;
+}
+p{
+	color: #fff;
+	text-align:left;
+	font-size: 1em;
+}
 
 #invitation .page{
     background-color:red;
