@@ -10,6 +10,18 @@
 		
 		<script type="text/javascript" src="jquery.min.js"></script>
 		<script type="text/javascript" src="bootstrap.min.js"></script>
+		
+		<script type="text/javascript">
+			function updateInvitee(index){
+				$('#id').val($('tr#invitee'+index).find('td').eq(0).text());
+				$('#lastname').val($('tr#invitee'+index).find('td').eq(1).text());
+				$('#firstname').val($('tr#invitee'+index).find('td').eq(2).text());
+				$('#buddy').val($('tr#invitee'+index).find('td').eq(3).text());
+				$('#lang').val($('tr#invitee'+index).find('td').eq(4).text());
+				$('#actType').val($('tr#invitee'+index).find('td').eq(5).text());
+			
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -26,27 +38,77 @@
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
+								<th class='hide'>_id</th>
 								<th>Lastname</th>
 								<th>Firstname</th>
+								<th>Buddy</th>
 								<th>Language</th>
 								<th>Activity</th>
+								<th></th> <!-- Modify -->
 								<th></th> <!-- Delete -->
 								<th></th> <!-- DownloadQR -->
 							</tr>
 						</thead>
 						<tbody>
 							<% for(var i=0; i<invitees.length; i++) { %>
-								<tr>
+								<tr id='invitee<%= i %>'>
+									<td class='hide'><%= invitees[i]._id %></td>
 									<td><%= invitees[i].lastname %></td>
 									<td><%= invitees[i].firstname %></td>
+									<td><%= invitees[i].buddy %></td>
 									<td><%= invitees[i].lang %></td>
 									<td><%= invitees[i].actType %></td>
+									<td><input type="button" onclick="updateInvitee(<%= i %>)" value="Modify"></td>
 									<td><input type="button" onclick="location.href ='/removeInvitee?id=<%= invitees[i]._id%>'" value="Delete"></td>
 									<td><input type="button" onclick="location.href ='/downloadQR?id=<%= invitees[i]._id%>'" value="DownloadQRcode"></td>
 								</tr>
 							<% } %>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-4">
+					<!--DONE: a form to add a new invitee -->
+					<h2>Add a new invitee:</h2>
+					<form role="form" method="post" action="/addInvitee">
+						<div class="form-group">
+							<label for="id" class="hide">id</label>
+							<input type="text" id="id" class="form-control hide" name="id" value="">
+						</div>
+						<div class="form-group">
+							<label for="firstname">First name</label>
+							<input type="text" id="firstname" class="form-control" name="firstname" required>
+						</div>
+						<div class="form-group">
+							<label for="lastname">Last name</label>
+							<input type="text" id="lastname" class="form-control" name="lastname" required>
+						</div>
+						<div class="form-group">
+							<label for="lastname">Buddy(Optional)</label>
+							<input type="text" id="buddy" class="form-control" name="buddy">
+						</div>
+						<div class="form-group">
+							<label for="lang">Language</label>
+							<select id="lang" class="form-control" name="lang" required>
+								<option value="FR">Français</option>
+								<option value="ZH">中文</option>
+								<option class="hide" value="EN">English</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="actType">Activity to attend</label>
+							<select id="actType" class="form-control" name="actType" required>
+								<option value="dinner">Dinner</option>
+								<option value="barbecue">Barbecue</option>
+							</select>
+						</div>
+						<input type="submit" value="Submit">
+						<input type="reset" value="Reset">
+					</form>
+				</div>
+				<div class="col-md-8">
 				</div>
 			</div>
 			<!-- include present management here -->

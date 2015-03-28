@@ -28,6 +28,7 @@ exports.admin = function(req, res){
  	_id: Int,
  	firstname: String,
  	lastname: String,
+ 	buddy: String, (optional)
  	lang: [ZH, FR, EN],
  	actType: [dinner, barbecue]
  }
@@ -36,22 +37,34 @@ exports.admin = function(req, res){
 exports.addInvitee = function(req, res){
 	checkLogin(req, res);
 	db.preUse();
+	var p_id = req.param('id');
 	var p_firstname = req.param('firstname');
 	var p_lastname = req.param('lastname');
+	var p_buddy = req.param('buddy');
 	var p_lang = req.param('lang');
 	var p_actType = req.param('actType');
-	var newInvitee = {firstname: p_firstname, lastname: p_lastname, lang: p_lang, actType: p_actType};
-	db.Db.collection("invitees").insert(newInvitee, 
-		function(err, saved){
-			//DONE: create QRcode here with saved, saved is the new record.
-			if(!err){
-				exports.genQR(saved._id);
-				res.redirect('/admin');
+	var newInvitee = {firstname: p_firstname, lastname: p_lastname, buddy: p_buddy, lang: p_lang, actType: p_actType};
+	if ("" == p_id){ // insert a new one.
+		db.Db.collection("invitees").insert(newInvitee, 
+			function(err, saved){
+				//DONE: create QRcode here with saved, saved is the new record.
+				if(!err){
+					exports.genQR(saved._id);
+					res.redirect('/admin');
+				}
 			}
-		}
-	);
-	//db.postUse();
-	
+		);
+	}
+	else{ // update.
+		db.Db.collection("invitees").update({_id: db.ObjectId(p_id)}, newInvitee, 
+			function(err, saved){
+				if(!err){
+					exports.genQR(saved._id);
+					res.redirect('/admin');
+				}
+			}
+		);
+	}
 }
 
 exports.removeInvitee = function(req, res){
