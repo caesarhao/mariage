@@ -26,6 +26,13 @@
            else{
            		$(".langZH").addClass('hide').show();
            }
+           
+           if (0 < <%= present.length %>){
+           		$("#selectPresent").addClass('hide').show();
+           }
+           else{
+           		$("#showPresent").addClass('hide').show();
+           }
     	});
     	$(document).bind('keydown', function(e){ 
         	if (e.keyCode==37)
@@ -65,10 +72,10 @@
 			<div id="page2">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-6">
+						<div id="selectPresent" class="col-md-6">
 							<h5 class="langZH">送个礼物:</h5>
 							<h5 class="langFR">Un cadeau:</h5>
-							<form role="form" method="post" action="/selectPresent">
+							<form role="form" method="post" action="/assignPresent">
 								<div class="form-group">
 									<label class="hide" for="id">id</label>
 									<input class="hide" type="text" id="id" class="form-control" name="id" value='<%= invitee._id %>' >
@@ -85,7 +92,14 @@
 								<input type="submit" value="Ok">
 							</form>
 						</div>
-						<div class="col-md-6">
+						<div id="showPresent" class="col-md-6">
+							<h5 class="langZH">您已经为我们选择礼物:</h5>
+							<h5 class="langFR">Vous nous avez choisi un cadeau:</h5>
+							<p>
+								<% if(0 < present.length) {%>
+									<%= 'ZH' == invitee.lang ? present[0].nameZH:present[0].nameFR %> (<%= present[0].price %> €)
+								<% } %>
+							</p>
 						</div>
 					</div>
 				</div>

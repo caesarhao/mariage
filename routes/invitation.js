@@ -13,9 +13,13 @@ exports.invitation = function(req, res){
 	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err, result1){
 		if(!err){
 			//TODO: just add not assigned presents here.
-			db.Db.collection("presents").find({}, function(err, result2){
+			db.Db.collection("presents").find({}, function(err, result2){ // select a present.
 				if(!err){
-					res.render('invitation', {invitee:result1[0], presents:result2} );
+					db.Db.collection("presents").find({}, function(err, result3){ // select a present.
+						if(!err){
+							res.render('invitation', {invitee: result1[0], presents: result2, present: result3} );
+						}
+					});
 				}
 			});
 		}
@@ -25,4 +29,15 @@ exports.invitation = function(req, res){
 		}
 	});
 };
+
+exports.assignPresent = function(req, res){
+	db.preUse();
+	//TODO: assignPresent
+	res.redirect('/invitation?id='+req.param('id'));
+}
+
+exports.dissociatePresent = function(req, res){
+	db.preUse();
+	//TODO
+}
 

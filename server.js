@@ -154,6 +154,8 @@ var SampleApp = function() {
         self.app.post('/auth', user.auth);
         self.app.post('/addInvitee', admin.addInvitee);
         self.app.post('/addPresent', admin.addPresent);
+        self.app.post('/assignPresent', invitation.assignPresent);
+        
         
     };
 
