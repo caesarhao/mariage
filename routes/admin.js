@@ -149,11 +149,13 @@ exports.removeQR = function(id){
 exports.addPresent = function(req, res){
 	checkLogin(req, res);
 	db.preUse();
+	var p_id = req.param('id');
 	var p_nameZH = req.param('nameZH');
 	var p_nameFR = req.param('nameFR');
 	var p_price = req.param('price');
 	var p_split = req.param('split');
 	var newPresents=new Array();
+	
 	if (1 == p_split){
 		newPresents.push({nameZH: p_nameZH, nameFR: p_nameFR, price: p_price});
 	}
@@ -162,14 +164,27 @@ exports.addPresent = function(req, res){
 			newPresents.push({nameZH: p_nameZH+'_'+i, nameFR: p_nameFR+'_'+i, price: (p_price/p_split).toFixed(2)});
 		}
 	}
-	db.Db.collection("presents").insert(newPresents, 
-		function(err, saved){
-			//DONE:.
-			if(!err){
-				res.redirect('/admin');
+	//console.log(newPresents);
+	if ("" == p_id){ // insert a new one.
+		
+		db.Db.collection("presents").insert(newPresents, 
+			function(err, saved){
+				//DONE:.
+				if(!err){
+					res.redirect('/admin');
+				}
 			}
-		}
-	);
+		);
+	}
+	else{ // update.
+		db.Db.collection("presents").update({_id: db.ObjectId(p_id)}, newPresents[0], 
+			function(err, saved){
+				if(!err){
+					res.redirect('/admin');
+				}
+			}
+		);
+	}
 }
 
 exports.removePresent = function(req, res){

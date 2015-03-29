@@ -1,23 +1,37 @@
 			<div class="row">
-				<script type="text/javascript"></script>
+				<script type="text/javascript">
+					function updatePresent(index){
+						$('#idp').val($('tr#present'+index).find('td').eq(0).text());
+						$('#nameZH').val($('tr#present'+index).find('td').eq(1).text());
+						$('#nameFR').val($('tr#present'+index).find('td').eq(2).text());
+						$('#price').val($('tr#present'+index).find('td').eq(3).text());
+						$('#split').val(1);
+						$('#split').prop('readonly', true);
+						
+					}
+				</script>
 				<div class="col-md-12">
 					<h2>Current presents: <%= presents.length %> </h2>
 					<!--DONE: a list of the current presents, support delete -->
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
+								<th class='hide'>_id</th>
 								<th>Chinese Name</th>
 								<th>French Name</th>
 								<th>Price</th>
+								<th></th> <!-- Modify -->
 								<th></th> <!-- Delete -->
 							</tr>
 						</thead>
 						<tbody>
 							<% for(var i=0; i<presents.length; i++) { %>
-								<tr>
+								<tr id='present<%= i %>'>
+									<td class='hide'><%= presents[i]._id %></td>
 									<td><%= presents[i].nameZH %></td>
 									<td><%= presents[i].nameFR %></td>
 									<td><%= presents[i].price %></td>
+									<td><input type="button" onclick="updatePresent(<%= i %>)" value="Modify"></td>
 									<td><input type="button" onclick="location.href ='/removePresent?id=<%= presents[i]._id%>'" value="Delete"></td>
 								</tr>
 							<% } %>
@@ -30,6 +44,10 @@
 					<!--DONE: a form to add a new present -->
 					<h2>Add a new present:</h2>
 					<form class="form-inline" method="post" action="/addPresent">
+						<div class="form-group">
+							<label for="id" class="hide">id</label>
+							<input type="text" id="idp" class="form-control hide" name="id" value="">
+						</div>
 						<div class="form-group">
 							<label for="nameZH">Chinese Name</label>
 							<input type="text" id="nameZH" class="form-control" name="nameZH" required>
@@ -47,6 +65,7 @@
 							<input type="number" id="split" class="form-control" name="split" min='1' step='1' value='1' required>
 						</div>
 						<input type="submit" value="Submit">
+						<input type="reset" value="Reset">
 					</form>
 				</div>
 				<div class="col-md-8">
