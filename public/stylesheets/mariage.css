@@ -12,19 +12,19 @@ body{
 	color: rgba(0,0,0,0.5);
 }
 h1{
-	font-size: 5em;
-	color:white;
-}
-h2{
-	font-size: 4em;
-	color:white;
-}
-h3{
 	font-size: 3em;
 	color:white;
 }
-h4{
+h2{
+	font-size: 2.5em;
+	color:white;
+}
+h3{
 	font-size: 2em;
+	color:white;
+}
+h4{
+	font-size: 1.5em;
 	color:white;
 }
 h5{
@@ -34,7 +34,7 @@ h5{
 p{
 	color: #fff;
 	text-align:left;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 .wrap{
 	margin-left: auto;
@@ -149,7 +149,7 @@ p{
 	z-index: 1;
 }
 #section1{
-	background-image: url("bg.jpg");
+	background-image: url("bg.png");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }

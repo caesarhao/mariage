@@ -100,12 +100,8 @@ var SampleApp = function() {
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
-        self.routes['/'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.render('index');
-        };
-        
-        
+        self.routes['/'] = admin.index;
+       	
         self.routes['/login'] = user.login;
         self.routes['/logout'] = user.logout;
         self.routes['/admin'] = admin.admin;

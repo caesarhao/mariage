@@ -12,6 +12,13 @@ function checkLogin(req, res){
 	}
 }
 
+exports.index = function(req, res){
+	db.preUse();
+	db.Db.collection("presents").find({}, function(err, result1){
+		res.render('index', {presents:result1});
+	});
+}
+
 exports.admin = function(req, res){
 	checkLogin(req, res);
 	//DONE: get currentInvitees from db.
