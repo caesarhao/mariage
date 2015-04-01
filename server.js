@@ -3,7 +3,6 @@
 var express = require('express');
 var user = require('./routes/user');
 var admin = require('./routes/admin');
-var invitation = require('./routes/invitation');
 var fs      = require('fs');
 var path	= require('path');
 /**
@@ -111,7 +110,7 @@ var SampleApp = function() {
         
         self.routes['/downloadQR'] = admin.downloadQR;
         
-        self.routes['/invitation'] = invitation.invitation;
+        self.routes['/invitation'] = admin.invitation;
     };
 
 
@@ -150,7 +149,7 @@ var SampleApp = function() {
         self.app.post('/auth', user.auth);
         self.app.post('/addInvitee', admin.addInvitee);
         self.app.post('/addPresent', admin.addPresent);
-        self.app.post('/assignPresent', invitation.assignPresent);
+        self.app.post('/assignPresent', admin.assignPresent);
         
         
     };

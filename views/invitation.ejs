@@ -77,13 +77,13 @@
 							<h5 class="langFR">Un cadeau:</h5>
 							<form role="form" method="post" action="/assignPresent">
 								<div class="form-group">
-									<label class="hide" for="id">id</label>
-									<input class="hide" type="text" id="id" class="form-control" name="id" value='<%= invitee._id %>' >
+									<label class="hide" for="inviteeId">inviteeId</label>
+									<input class="hide" type="text" id="inviteeId" class="form-control" name="inviteeId" value='<%= invitee._id %>' >
 								</div>
 								<div class="form-group">
-									<label for="present" class="langFR">Choisissez un cadeau pour nous, si vous voulez:</label>
-									<label for="present" class="langZH">给我们选个礼物吧:</label>
-									<select id="present" class="form-control" name="present" required>
+									<label for="presentId" class="langFR">Choisissez un cadeau pour nous, si vous voulez:</label>
+									<label for="presentId" class="langZH">给我们选个礼物吧:</label>
+									<select id="presentId" class="form-control" name="presentId" required>
 										<% for(var i=0; i < presents.length; i++) { %>
 											<option value='<%= presents[i]._id %>'><%= 'ZH' == invitee.lang ? presents[i].nameZH:presents[i].nameFR %> (<%= presents[i].price %> €)</option>
 										<% } %>

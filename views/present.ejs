@@ -20,6 +20,7 @@
 								<th>Chinese Name</th>
 								<th>French Name</th>
 								<th>Price</th>
+								<th>AssignedInvitee</th>
 								<th></th> <!-- Modify -->
 								<th></th> <!-- Delete -->
 							</tr>
@@ -31,6 +32,7 @@
 									<td><%= presents[i].nameZH %></td>
 									<td><%= presents[i].nameFR %></td>
 									<td><%= presents[i].price %></td>
+									<td><%= presents[i].inviteeId %></td>
 									<td><input type="button" onclick="updatePresent(<%= i %>)" value="Modify"></td>
 									<td><input type="button" onclick="location.href ='/removePresent?id=<%= presents[i]._id%>'" value="Delete"></td>
 								</tr>

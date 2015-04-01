@@ -37,7 +37,8 @@ exports.admin = function(req, res){
  	lastname: String,
  	buddy: String, (optional)
  	lang: [ZH, FR, EN],
- 	actType: [dinner, barbecue]
+ 	actType: [dinner, barbecue],
+ 	presentId: String (Optional)
  }
 */
 
@@ -57,18 +58,26 @@ exports.addInvitee = function(req, res){
 				//DONE: create QRcode here with saved, saved is the new record.
 				if(!err){
 					exports.genQR(saved._id);
-					res.redirect('/admin');
+					return res.redirect('/admin');
 				}
 			}
 		);
 	}
 	else{ // update.
-		db.Db.collection("invitees").update({_id: db.ObjectId(p_id)}, newInvitee, 
-			function(err, saved){
-				if(!err){
-					exports.genQR(saved._id);
-					res.redirect('/admin');
+		db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, 
+			function(err1, result1){
+				var invitee = result1[0];
+				for (var key in newInvitee){
+					invitee[key] = newInvitee[key];
 				}
+				db.Db.collection("invitees").update({_id: db.ObjectId(p_id)}, invitee, 
+					function(err2, saved2){
+						if(!err2){
+							exports.genQR(p_id);
+							return res.redirect('/admin');
+						}
+					}
+				);
 			}
 		);
 	}
@@ -78,10 +87,25 @@ exports.removeInvitee = function(req, res){
 	checkLogin(req, res);
 	db.preUse();
 	var p_id = req.param('id');
-	db.Db.collection("invitees").remove({_id: db.ObjectId(p_id)});
-	//DONE: remove qrcode too.
-	exports.removeQR(p_id);
-	//db.postUse();
+	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, 
+		function(err1, result1){
+			var invitee = result1[0];
+			if (invitee.hasOwnProperty('presentId')){//delete present relation.
+				deleteInviteePresentRelation(p_id, invitee.presentId, 
+					function(){
+						db.Db.collection("invitees").remove({_id: db.ObjectId(p_id)});
+						//DONE: remove qrcode too.
+						exports.removeQR(p_id);
+					}
+				);
+			}
+			else{
+				db.Db.collection("invitees").remove({_id: db.ObjectId(p_id)});
+				//DONE: remove qrcode too.
+				exports.removeQR(p_id);
+			}
+		}
+	);
 	res.redirect('/admin');
 }
 
@@ -150,7 +174,8 @@ exports.removeQR = function(id){
  	_id: Int,
  	nameZH: String,
  	nameFR: String,
- 	price: Float
+ 	price: Float,
+ 	inviteeId: String (Optional)
  }
 */
 exports.addPresent = function(req, res){
@@ -184,11 +209,19 @@ exports.addPresent = function(req, res){
 		);
 	}
 	else{ // update.
-		db.Db.collection("presents").update({_id: db.ObjectId(p_id)}, newPresents[0], 
-			function(err, saved){
-				if(!err){
-					res.redirect('/admin');
+		db.Db.collection("presents").find({_id: db.ObjectId(p_id)}, 
+			function(err1, result1){
+				var present = result1[0];
+				for (var key in newPresents[0]){
+					present[key] = newPresents[0][key];
 				}
+				db.Db.collection("presents").update({_id: db.ObjectId(p_id)}, present, 
+					function(err2, saved2){
+						if(!err2){
+							res.redirect('/admin');
+						}
+					}
+				);
 			}
 		);
 	}
@@ -198,7 +231,133 @@ exports.removePresent = function(req, res){
 	checkLogin(req, res);
 	db.preUse();
 	var p_id = req.param('id');
-	db.Db.collection("presents").remove({_id: db.ObjectId(p_id)});
+	db.Db.collection("presents").find({_id: db.ObjectId(p_id)}, 
+		function(err1, result1){
+			var present = result1[0];
+			if (present.hasOwnProperty('inviteeId')){//delete invitee relation.
+				deleteInviteePresentRelation(present.inviteeId, p_id, 
+					function(){
+						db.Db.collection("presents").remove({_id: db.ObjectId(p_id)});
+					}
+				);
+			}
+			else{
+				db.Db.collection("presents").remove({_id: db.ObjectId(p_id)});
+			}
+		}
+	);
 	res.redirect('/admin');
+}
+
+exports.invitation = function(req, res){
+	db.preUse();
+	var p_id = req.param('id');
+	if (24 !== p_id.length){
+		res.send(404);
+		return;
+	}
+	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err1, result1){
+		if(!err1){
+			if (1 > result1.length){
+				res.send(404);
+				return;
+			}
+			//DONE: just add not assigned presents here.
+			db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err2, result2){ // all presents not assigned.
+				if(!err2){
+					db.Db.collection("presents").find({inviteeId: p_id}, function(err3, result3){ // find the present assigned to this invitee.
+						if(!err3){
+							return res.render('invitation', {invitee: result1[0], presents: result2, present: result3} );
+						}
+					});
+				}
+			});
+		}
+		else{
+			res.send(404);
+			return;
+		}
+	});
+};
+
+exports.assignPresent = function(req, res){
+	db.preUse();
+	//DONE: assignPresent
+	// check the invitee hasn't selected present.
+	// check the present hasn't been selected.
+	// add assign relation.
+	var p_id = req.param('id');
+	var p_inviteeId = req.param('inviteeId');
+	var p_presentId = req.param('presentId');
+	db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err0, result0){ // all presents not assigned.
+		if(!err0){
+			db.Db.collection("invitees").find({_id: db.ObjectId(p_inviteeId)}, function(err1, result1){
+				if(!err1){
+					var invitee = result1[0];
+					if (invitee.hasOwnProperty('presentId')){ // has selected present.
+						res.redirect('/invitation?id='+p_inviteeId);
+					}
+					else{
+						db.Db.collection("presents").find({_id: db.ObjectId(p_presentId)}, 
+							function(err2, result2){
+								if(!err2){
+									var present = result2[0];
+									if (present.hasOwnProperty('inviteeId')){ // has been selected by other invitees.
+										res.render('invitation', {invitee: invitee, presents: result0, present: [], alertmsg:"This present has been selected, please select another one."} );
+									}
+									else{//assign the relation.
+										invitee.presentId = p_presentId;
+										db.Db.collection("invitees").update({_id: db.ObjectId(p_inviteeId)}, invitee, 
+											function(err3, result3){
+												if(!err3){
+													present.inviteeId = p_inviteeId;
+													db.Db.collection("presents").update({_id: db.ObjectId(p_presentId)}, present, 
+														function(err4, result4){
+															if(!err4){
+																return res.redirect('/invitation?id='+p_inviteeId);
+															}
+														}
+													);
+												}	
+											}
+										);
+									}
+								}
+							}
+						);
+					}
+				}
+			});
+		}
+	});
+}
+
+function deleteInviteePresentRelation(inviteeId, presentId, callback){
+	db.preUse();
+	db.Db.collection("invitees").update({_id: db.ObjectId(inviteeId)}, {$unset:{presentId: ""}}, 
+		function(err1, result1){
+			db.Db.collection("presents").update({_id: db.ObjectId(presentId)}, {$unset:{inviteeId: ""}}, 
+				function(err2, result2){
+					callback();
+				}
+			);
+		}
+	);
+}
+
+exports.dissociatePresent = function(req, res){
+	db.preUse();
+	var p_id = req.param('id');
+	var p_inviteeId = req.param('inviteeId');
+	var p_presentId = req.param('presentId');
+	db.Db.collection("invitees").update({_id: db.ObjectId(p_inviteeId)}, {$unset:{presentId: ""}}, 
+		function(err1, result1){
+			db.Db.collection("presents").update({_id: db.ObjectId(p_presentId)}, {$unset:{inviteeId: ""}}, 
+				function(err2, result2){
+					redirect("/admin");
+				}
+			);
+		}
+	);
 }
 

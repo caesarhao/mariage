@@ -43,6 +43,7 @@
 								<th>Buddy</th>
 								<th>Language</th>
 								<th>Activity</th>
+								<th>AssignedPresent</th>
 								<th></th> <!-- Modify -->
 								<th></th> <!-- Delete -->
 								<th></th> <!-- DownloadQR -->
@@ -57,6 +58,7 @@
 									<td><%= invitees[i].buddy %></td>
 									<td><%= invitees[i].lang %></td>
 									<td><%= invitees[i].actType %></td>
+									<td><%= invitees[i].presentId %></td>
 									<td><input type="button" onclick="updateInvitee(<%= i %>)" value="Modify"></td>
 									<td><input type="button" onclick="location.href ='/removeInvitee?id=<%= invitees[i]._id%>'" value="Delete"></td>
 									<td><input type="button" onclick="location.href ='/downloadQR?id=<%= invitees[i]._id%>'" value="DownloadQRcode"></td>
