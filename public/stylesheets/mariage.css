@@ -25,7 +25,7 @@ h3{
 }
 h4{
 	font-size: 1.5em;
-	color:#FA5882;
+	color:#EE7621;
 }
 h5{
 	color: #CEF6F5;
@@ -67,24 +67,24 @@ p{
 	margin: 10px;
 	color: #000;
 	background:#fff;
-	background: rgba(255,255,255, 0.5);
+	background: rgba(255,255,255, 0);
 	-webkit-border-radius: 10px;
             border-radius: 10px;
 }
 #menu li.active{
-	background:#666;
-	background: rgba(0,0,0, 0.5);
+	
+	background: rgba(65,105,225, 0.5);
 	color: #fff;
 }
 #menu li a{
 	text-decoration:none;
-	color: #000;
+	color: #EE7621;
 }
 #menu li.active a:hover{
-	color: #000;
+	color: #FFFFF0;
 }
 #menu li:hover{
-	background: rgba(255,255,255, 0.8);
+	background: rgba(238 ,197 ,145,0.6);
 }
 #menu li a,
 #menu li.active a{
