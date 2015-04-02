@@ -14,8 +14,20 @@ function checkLogin(req, res){
 
 exports.index = function(req, res){
 	db.preUse();
-	db.Db.collection("presents").find({}, function(err, result1){
-		res.render('index', {presents:result1});
+	db.Db.collection("presents").find({}, function(err1, result1){
+		db.Db.collection("invitees").find({}, function(err2, result2){
+			for (var i = 0; i<result1.length; i++){
+				if (result1[i].hasOwnProperty('inviteeId')){
+					for (var j = 0; j<result2.length; j++){
+						if (result2[j]._id == result1[i].inviteeId){
+							result1[i].inviteeName = result2[j].lastname + ' ' + result2[j].firstname;
+							break;
+						}
+					}
+				}
+			}
+			res.render('index', {presents:result1});
+		});
 	});
 }
 
@@ -23,8 +35,20 @@ exports.admin = function(req, res){
 	checkLogin(req, res);
 	//DONE: get currentInvitees from db.
 	db.preUse();
-	db.Db.collection("invitees").find({}, function(err, result1){
-		db.Db.collection("presents").find({}, function(err, result2){
+	db.Db.collection("invitees").find({}, function(err1, result1){
+		db.Db.collection("presents").find({}, function(err2, result2){
+			for (var i = 0; i<result1.length; i++){
+				if (result1[i].hasOwnProperty('presentId')){
+					for (var j = 0; j<result2.length; j++){
+						if (result2[j]._id == result1[i].presentId){
+							result1[i].presentNameFR = result2[j].nameFR;
+							result1[i].presentNameZH = result2[j].nameZH;
+							result2[j].inviteeName = result1[i].lastname + ' ' + result1[i].firstname;
+							break;
+						}
+					}
+				}
+			}
 			res.render('admin', {user: req.session.user, invitees: result1, presents:result2});
 		});
 	});
@@ -354,7 +378,7 @@ exports.dissociatePresent = function(req, res){
 		function(err1, result1){
 			db.Db.collection("presents").update({_id: db.ObjectId(p_presentId)}, {$unset:{inviteeId: ""}}, 
 				function(err2, result2){
-					redirect("/admin");
+					res.redirect("/admin");
 				}
 			);
 		}

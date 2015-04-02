@@ -111,6 +111,8 @@ var SampleApp = function() {
         self.routes['/downloadQR'] = admin.downloadQR;
         
         self.routes['/invitation'] = admin.invitation;
+        
+         self.routes['/deassign'] = admin.dissociatePresent;
     };
 
 

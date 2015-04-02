@@ -52,17 +52,27 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="langZH">
-								<h3>送呈 <%= invitee.lastname %> <%= invitee.firstname %> 亲启</h3>
-								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）在Castres举行结婚典礼敬备喜筵！
+								<h3>送呈 <%= invitee.lastname %> <%= invitee.firstname %> <%= invitee.buddy %> 亲启</h3>
+								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）星期六在Castres举行结婚典礼敬备喜筵！
 								</p>
-								<p>恭请光临
+								<p>恭请光临参加
+								<% if("dinner" == invitee.actType) {%>
+								城堡晚宴 <strong>时间：</strong> 5月2日周六晚上六点整
+								<% } else{ %>
+								城堡花园烧烤<strong>时间：</strong> 5月3日周日早上十点整
+								<% } %>
 								</p>
 							</div>
 							<div class="langFR">
-								<h3>送呈 <%= invitee.lastname %> <%= invitee.firstname %> 亲启</h3>
-								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）在Castres举行结婚典礼敬备喜筵！
+								<h3> A l'attention de <%= invitee.lastname %> <%= invitee.firstname %> <%= invitee.buddy %> </h3>
+								<p>Jing et Hao ont la joie de vous annoncer leur mariage qui sera célébré le samedi 2 mai 2015, à 15h00 à la mairie de Castres.
 								</p>
-								<p>恭请光临
+								<p>A l'issue de la cérémonie, les familles auront le plaisir de vous accueillir pour un vin d'honneur et 
+								<% if("dinner" == invitee.actType) {%>
+								un dîner servis au Château de la Vère de Larroque à partir de 18h00 le samedi.
+								<% } else{ %>
+								un barbecue au Château de la Vère de Larroque à partir de 10h00 le dimanche.
+								<% } %>
 								</p>
 							</div>
 						</div>
@@ -72,7 +82,7 @@
 			<div id="page2">
 				<div class="container-fluid">
 					<div class="row">
-						<div id="selectPresent" class="col-md-6">
+						<div id="selectPresent" class="col-md-12">
 							<h5 class="langZH">送个礼物:</h5>
 							<h5 class="langFR">Un cadeau:</h5>
 							<form role="form" method="post" action="/assignPresent">
@@ -92,7 +102,7 @@
 								<input type="submit" value="Ok">
 							</form>
 						</div>
-						<div id="showPresent" class="col-md-6">
+						<div id="showPresent" class="col-md-12">
 							<h5 class="langZH">您已经为我们选择礼物:</h5>
 							<h5 class="langFR">Vous nous avez choisi un cadeau:</h5>
 							<p>
@@ -100,6 +110,12 @@
 									<%= 'ZH' == invitee.lang ? present[0].nameZH:present[0].nameFR %> (<%= present[0].price %> €)
 								<% } %>
 							</p>
+						</div>
+						<div class="col-md-12 pull-right">
+							<a class="btn btn-info" href="/" target="_blank" role="button">
+								<h3 class="langZH">欣赏我们的宣传页</h3>
+								<h3 class="langFR">Regardez notre annonce</h3>
+							</a>
 						</div>
 					</div>
 				</div>

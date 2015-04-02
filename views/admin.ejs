@@ -43,10 +43,13 @@
 								<th>Buddy</th>
 								<th>Language</th>
 								<th>Activity</th>
+								<th class='hide'>presentId</th>
 								<th>AssignedPresent</th>
+								<th>DeassignPresent</th>
 								<th></th> <!-- Modify -->
 								<th></th> <!-- Delete -->
 								<th></th> <!-- DownloadQR -->
+								<th>InvitationLink</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -58,10 +61,17 @@
 									<td><%= invitees[i].buddy %></td>
 									<td><%= invitees[i].lang %></td>
 									<td><%= invitees[i].actType %></td>
-									<td><%= invitees[i].presentId %></td>
+									<td class='hide'><%= invitees[i].presentId %></td>
+									<td><%= invitees[i].presentNameFR %></td>
+									<td>
+										<% if(invitees[i].presentId) { %>
+											<input type="button" onclick="location.href ='/deassign?inviteeId=<%= invitees[i]._id %>&presentId=<%= invitees[i].presentId %>'" value="Deassign">
+										<% } %>
+									</td>
 									<td><input type="button" onclick="updateInvitee(<%= i %>)" value="Modify"></td>
 									<td><input type="button" onclick="location.href ='/removeInvitee?id=<%= invitees[i]._id%>'" value="Delete"></td>
 									<td><input type="button" onclick="location.href ='/downloadQR?id=<%= invitees[i]._id%>'" value="DownloadQRcode"></td>
+									<td>http://mariage-caesarhao.rhcloud.com/invitation?id=<%= invitees[i]._id %></td>
 								</tr>
 							<% } %>
 						</tbody>
