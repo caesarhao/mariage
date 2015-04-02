@@ -25,15 +25,23 @@ h3{
 }
 h4{
 	font-size: 1.5em;
-	color:white;
+	color:#FA5882;
 }
 h5{
+	color: #CEF6F5;
+	text-align:right;
 	font-size: 1em;
-	color:white;
 }
+h6{
+	color: #DF0101;
+	text-align:justify;
+	font-size: 2.5em;
+}
+
+
 p{
-	color: #fff;
-	text-align:left;
+	color: #DF0101;
+	text-align:justify;
 	font-size: 1.5em;
 }
 .wrap{
@@ -153,6 +161,52 @@ p{
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+#section2{
+	background-image: url("fond_rose.JPG");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#section3{
+	background-image: url("Nice.JPG");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#slide9{
+	background-image: url("fond2.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#slide10{
+	background-image: url("fond_snow.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#slide_mairie{
+	background-image: url("castres_mairie.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#slide_cadeaux{
+	background-image: url("lavande.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#slide_dinner{
+	background-image: url("fond3.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#slide_barbecue{
+	background-image: url("fond3.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+
+
 ul.countdown {
 list-style: none;
 margin: 5px 0;
