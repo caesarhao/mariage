@@ -44,6 +44,13 @@ p{
 	text-align:justify;
 	font-size: 1.5em;
 }
+th{
+	color: #EE7621;
+	font-family: Arial; 
+	font-size: 1.5em;
+}
+
+
 .wrap{
 	margin-left: auto;
 	margin-right: auto;
@@ -206,6 +213,16 @@ p{
 	background-image: url("fond_gourjade.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
+}
+
+#giftable {
+    width: 100%;
+    background-color: #D8F0DA;
+    border: 1px;
+    min-width: 100%;
+    position: relative;
+    opacity: 0.97;
+    background: transparent;
 }
 
 
