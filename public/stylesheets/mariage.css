@@ -157,28 +157,32 @@ p{
 	z-index: 1;
 }
 #section1{
-	background-image: url("bg.png");
+	background-image: url("bg_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 #section2{
-	background-image: url("fond_rose.JPG");
+	background-image: url("fond_rose_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 #section3{
-	background-image: url("Nice.JPG");
+	background-image: url("Nice_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
-
+#slide8{
+	background-image: url("fond_matin.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 #slide9{
-	background-image: url("fond2.jpg");
+	background-image: url("fond2_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 #slide10{
-	background-image: url("fond_snow.jpg");
+	background-image: url("fond_snow_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -194,12 +198,12 @@ p{
     background-size: 100% 100%;
 }
 #slide_dinner{
-	background-image: url("fond3.jpg");
+	background-image: url("fond3_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 #slide_barbecue{
-	background-image: url("fond3.jpg");
+	background-image: url("fond_gourjade.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
