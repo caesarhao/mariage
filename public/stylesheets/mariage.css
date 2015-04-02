@@ -60,7 +60,7 @@ th{
 }
 .section{
 	text-align:center;
-	padding:10px 10px 10px 10px;
+	padding:0px 0px 0px 0px;
 }
 .slide{
 	text-align:center;
@@ -168,6 +168,7 @@ th{
 	background-image: url("bg_sm.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
+    
 }
 #section2{
 	background-image: url("fond_rose_sm.jpg");

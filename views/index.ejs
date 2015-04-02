@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="mariage.css">
 	
 	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
 	<script type="text/javascript" src="jquery.downCount.js"></script>
@@ -24,6 +25,7 @@
 				menu: '#menu',
 				css3: true,
 				scrollingSpeed: 1000,
+				scrollOverflow: true,
 				navigation: false, // doesn't show navigation on the right side
 				loopBottom: false,
 				loopTop: false,
@@ -63,8 +65,19 @@
 			$('.selectLanguageItem').click(function(){
 				selectLanguage($(this).attr('id'));
 			});
-			// francais par defaut
-			selectLanguage('selectZH');
+			// if lang is set.
+			<% if(locals.lang) { %>
+				selectLanguage('select'+lang);
+			<% } else { %> // select by the language in the browser.
+				var userLang = navigator.language || navigator.userLanguage;
+				if(0 <= userLang.toLowerCase().indexOf("zh")){
+					selectLanguage('selectZH');
+				}
+				else{
+					selectLanguage('selectFR');
+				}
+			<% } %>
+			
 		});
 	</script>
 	<script type="text/javascript">
@@ -404,8 +417,8 @@
 			<div class="container-fluid">
 				<div class="row">
 					
-					<div class="col-md-4">
-						<img src="mairie.jpg" class="img-rounded img-responsive">
+					<div class="col-md-5">
+						<img src="mairie.png" class="img-rounded img-responsive">
 					</div>
 					<div class="col-md-4 langZH">
 						<img src="fond_letter_cn.png" class="img-rounded img-responsive">
@@ -413,13 +426,6 @@
 					<div class="col-md-4 langFR">
 						<img src="fond_letter_fr.png" class="img-rounded img-responsive">
 					</div>
-					<div class="col-md-4">
-						<img src="parking.jpg" class="img-rounded img-responsive">
-					</div>
-					
-					
-				
-				
 				</div>
 			</div>
 		</div>
@@ -441,9 +447,9 @@
 					<div class="col-md-6">
 						<h2 class="langFR">Liste des Cadeaux</h2>
 						<h2 class="langZH">礼物清单</h2>
-						<table class="table " id="giftable">
+						<table class="table table-bordered" id="giftable">
 							<thead>
-								<tr>
+								<tr class="active">
 									<th class="langFR">Cadeaux</th>
 									<th class="langZH">礼物</th>
 									<th class="langFR">Donneur</th>
@@ -454,7 +460,7 @@
 							</thead>
 							<tbody>
 								<% for(var i=0; i<presents.length; i++) { %>
-									<tr>
+									<tr class="warning">
 										<td  class="langZH"><%= presents[i].nameZH %></td>
 										<td  class="langFR"><%= presents[i].nameFR %></td>
 										<td><%= presents[i].inviteeName %></td>

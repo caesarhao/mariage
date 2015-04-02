@@ -14,6 +14,7 @@ function checkLogin(req, res){
 
 exports.index = function(req, res){
 	db.preUse();
+	var p_lang = req.param('lang') || "";
 	db.Db.collection("presents").find({}, function(err1, result1){
 		db.Db.collection("invitees").find({}, function(err2, result2){
 			for (var i = 0; i<result1.length; i++){
@@ -26,7 +27,13 @@ exports.index = function(req, res){
 					}
 				}
 			}
-			res.render('index', {presents:result1});
+			if (0 < p_lang.length){
+				res.render('index', {presents:result1, lang:p_lang});
+			}
+			else{
+				res.render('index', {presents:result1});
+			}
+			
 		});
 	});
 }
