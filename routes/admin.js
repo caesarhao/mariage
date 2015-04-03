@@ -27,6 +27,7 @@ exports.index = function(req, res){
 					}
 				}
 			}
+			
 			if (0 < p_lang.length){
 				res.render('index', {presents:result1, lang:p_lang});
 			}

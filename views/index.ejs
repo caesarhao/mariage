@@ -67,7 +67,13 @@
 			});
 			// if lang is set.
 			<% if(locals.lang) { %>
-				selectLanguage('select'+lang);
+				var userLang = "<%= lang %>";
+				if(0 <= userLang.toUpperCase().indexOf("ZH")){
+					selectLanguage('selectZH');
+				}
+				else{
+					selectLanguage('selectFR');
+				}
 			<% } else { %> // select by the language in the browser.
 				var userLang = navigator.language || navigator.userLanguage;
 				if(0 <= userLang.toLowerCase().indexOf("zh")){
@@ -89,20 +95,18 @@
         });
     </script>
 	<script>
-// Using multiple unit types within one animation.
- 
-$( document ).ready(function() {
-  $( "#block" ).animate({
-    width: "90%",
-    marginLeft: "1.5in",
-    fontSize: "18px",
-    borderWidth: "10px"
-  }, 1516 );
+		// Using multiple unit types within one animation.
+		 
+		$( document ).ready(function() {
+		  $( "#block" ).animate({
+			width: "90%",
+			marginLeft: "1.5in",
+			fontSize: "18px",
+			borderWidth: "10px"
+		  }, 1516 );
 
- });
-
-
-</script>
+		 });
+	</script>
 
 
     <!-- no need google map now.
