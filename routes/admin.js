@@ -183,7 +183,7 @@ exports.genQR = function(id){
 	if(!fs.existsSync('public/images/qrs')){
 		fs.mkdirSync('public/images/qrs');
 	}
-	var qr_png = qr.image('http://mariage-caesarhao.rhcloud.com/invitation?id=' + id, { type: 'png' });
+	var qr_png = qr.image('https://mariage-caesarhao.rhcloud.com/invitation?id=' + id, { type: 'png' });
 	qr_png.pipe(fs.createWriteStream('public/images/qrs/' + id + '.png'));
 	return (id + '.png');
 }
