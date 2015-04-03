@@ -53,7 +53,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="langZH">
-								<br><h3>送呈 <strong><%= invitee.lastname %> <%= invitee.firstname %></strong> <strong> <% if (0 < "<%= invitee.buddy %>".length) {%>, <%= invitee.buddy %> <% } %></strong> 亲启</h3>
+								<br><h3>送呈 <strong><%= invitee.lastname %> <%= invitee.firstname %></strong> <strong><% if("" !=  invitee.buddy) {%>, <% } %><%= invitee.buddy %></strong> 亲启</h3>
 								<h3>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）星期六在法国卡斯特市举行结婚典礼敬备喜筵！
 								</h3>
 								<% if("dinner" == invitee.actType) {%>
@@ -68,7 +68,7 @@
 							</div>
 							<div class="langFR">
 							
-								<br><p>A l'attention de <b><%= invitee.lastname %> <%= invitee.firstname %><% if (0 < "<%= invitee.buddy %>".length) {%>, <%= invitee.buddy %> <% } %></b> </p>
+								<br><p>A l'attention de <b><%= invitee.lastname %> <%= invitee.firstname %><% if("" !=  invitee.buddy) {%>, <% } %><%= invitee.buddy %></b> </p>
 								<br><p>Jing et Hao ont la joie de vous annoncer leur mariage qui sera célébré le samedi 2 mai 2015, à 15h00 à la mairie de Castres.
 								</p><br>
 								<p>A l'issue de la cérémonie, les familles auront le plaisir de vous accueillir pour  
