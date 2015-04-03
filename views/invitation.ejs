@@ -8,7 +8,8 @@
   	<title>Invitation</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="invitation.css">
-		
+	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="turn.min.js"></script>
@@ -52,26 +53,27 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="langZH">
-								<h3>送呈 <%= invitee.lastname %> <%= invitee.firstname %> <%= invitee.buddy %> 亲启</h3>
-								<p>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）星期六在Castres举行结婚典礼敬备喜筵！
-								</p>
-								<p>恭请光临参加
+								<br><h3>送呈 <strong><%= invitee.lastname %> <%= invitee.firstname %></strong> <strong> <%= invitee.buddy %></strong> 亲启</h3>
+								<h3>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）星期六在法国卡斯特市举行结婚典礼敬备喜筵！
+								</h3>
+								<h3>恭请光临参加
 								<% if("dinner" == invitee.actType) {%>
-								城堡晚宴 <strong>时间：</strong> 5月2日周六晚上六点整
+								晚宴<br><strong>时间： 当日晚上八点整<br>地点： 拉威赫城堡
 								<% } else{ %>
-								城堡花园烧烤<strong>时间：</strong> 5月3日周日早上十点整
+								花园烧烤<br>时间： 翌日上午十一点<br>地点： 拉威赫城堡
 								<% } %>
-								</p>
+								</h3>
 							</div>
 							<div class="langFR">
-								<h3> A l'attention de <%= invitee.lastname %> <%= invitee.firstname %> <%= invitee.buddy %> </h3>
-								<p>Jing et Hao ont la joie de vous annoncer leur mariage qui sera célébré le samedi 2 mai 2015, à 15h00 à la mairie de Castres.
-								</p>
-								<p>A l'issue de la cérémonie, les familles auront le plaisir de vous accueillir pour un vin d'honneur et 
+							
+								<br><p>A l'attention de <b><%= invitee.lastname %> <%= invitee.firstname %> <%= invitee.buddy %></b> </p>
+								<br><p>Jing et Hao ont la joie de vous annoncer leur mariage qui sera célébré le samedi 2 mai 2015, à 15h00 à la mairie de Castres.
+								</p><br>
+								<p>A l'issue de la cérémonie, les familles auront le plaisir de vous accueillir pour  
 								<% if("dinner" == invitee.actType) {%>
-								un dîner servis au Château de la Vère de Larroque à partir de 18h00 le samedi.
+								un vin d'honneur et un dîner servis au Château de la Vère de Larroque à partir de 18h00 le même jour.
 								<% } else{ %>
-								un barbecue au Château de la Vère de Larroque à partir de 10h00 le dimanche.
+								un barbecue au Château de la Vère de Larroque à partir de 11h00 le jour suivant.
 								<% } %>
 								</p>
 							</div>
@@ -83,39 +85,46 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div id="selectPresent" class="col-md-12">
-							<h5 class="langZH">送个礼物:</h5>
-							<h5 class="langFR">Un cadeau:</h5>
+							
+						
 							<form role="form" method="post" action="/assignPresent">
 								<div class="form-group">
 									<label class="hide" for="inviteeId">inviteeId</label>
 									<input class="hide" type="text" id="inviteeId" class="form-control" name="inviteeId" value='<%= invitee._id %>' >
 								</div>
-								<div class="form-group">
-									<label for="presentId" class="langFR">Choisissez un cadeau pour nous, si vous voulez:</label>
-									<label for="presentId" class="langZH">给我们选个礼物吧:</label>
-									<select id="presentId" class="form-control" name="presentId" required>
+								<div class="form-group" id="giftdiv">
+									<label for="presentId" class="langFR"><h5>Choisissez un cadeau pour nous, si vous voulez</h5></label>
+									<label for="presentId" class="langZH">	<h4 class="langZH">送上一份礼物</h4></label>
+									<select id="presentId" class="form-control col-md-8" name="presentId" required>
 										<% for(var i=0; i < presents.length; i++) { %>
 											<option value='<%= presents[i]._id %>'><%= 'ZH' == invitee.lang ? presents[i].nameZH:presents[i].nameFR %> (<%= presents[i].price %> €)</option>
 										<% } %>
 									</select>
+									
+									<button type="submit" value="Ok" class="button tick col-md-3 col-md-offset-1" > </button>
 								</div>
-								<input type="submit" value="Ok">
+								
+								
+								
 							</form>
 						</div>
 						<div id="showPresent" class="col-md-12">
 							<h5 class="langZH">您已经为我们选择礼物:</h5>
-							<h5 class="langFR">Vous nous avez choisi un cadeau:</h5>
+							<h5 class="langFR">Vous avez choisi le cadeau pour nous.</h5>
 							<p>
 								<% if(0 < present.length) {%>
 									<%= 'ZH' == invitee.lang ? present[0].nameZH:present[0].nameFR %> (<%= present[0].price %> €)
 								<% } %>
 							</p>
 						</div>
-						<div class="col-md-12 pull-right">
-							<a class="btn btn-info" href="/?lang=<%= invitee.lang %>" target="_blank" role="button">
-								<h3 class="langZH">欣赏我们的宣传页</h3>
-								<h3 class="langFR">Regardez notre annonce</h3>
-							</a>
+						
+						<div class="col-md-12">
+							<div id="menuBall1" class="menuBall">
+								<a class="ball blueball" href="/?lang=<%= invitee.lang %>" target="_blank" role="button">
+								
+								</a>
+								<div class="menuText">+ Info</div>								
+							</div>
 						</div>
 					</div>
 				</div>
