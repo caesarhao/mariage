@@ -56,11 +56,14 @@
 								<br><h3>送呈 <strong><%= invitee.lastname %> <%= invitee.firstname %></strong> <strong> <%= invitee.buddy %></strong> 亲启</h3>
 								<h3>张浩与郭静谨定于公元2015年5月2日（乙未年三月十四日）星期六在法国卡斯特市举行结婚典礼敬备喜筵！
 								</h3>
-								<h3>恭请光临参加
 								<% if("dinner" == invitee.actType) {%>
-								晚宴<br><strong>时间： 当日晚上八点整<br>地点： 拉威赫城堡
+								<h3>恭请光临参加晚宴</h3>
+								<h3><strong>时间：</strong> 当日晚上八点整</h3>
+								<h3><strong>地点：</strong> 拉威赫城堡</h3>
 								<% } else{ %>
-								花园烧烤<br>时间： 翌日上午十一点<br>地点： 拉威赫城堡
+								<h3>恭请光临参加花园烧烤</h3>
+								<h3><strong>时间：</strong> 翌日上午十一点</h3>
+								<h3><strong>地点：</strong> 拉威赫城堡</h3>
 								<% } %>
 								</h3>
 							</div>
@@ -90,7 +93,7 @@
 							<form role="form" method="post" action="/assignPresent">
 								<div class="form-group">
 									<label class="hide" for="inviteeId">inviteeId</label>
-									<input class="hide" type="text" id="inviteeId" class="form-control" name="inviteeId" value='<%= invitee._id %>' >
+									<input class="hide form-control" type="text" id="inviteeId" name="inviteeId" value='<%= invitee._id %>' >
 								</div>
 								<div class="form-group" id="giftdiv">
 									<label for="presentId" class="langFR"><h5>Choisissez un cadeau pour nous, si vous voulez</h5></label>
