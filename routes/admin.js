@@ -5,6 +5,8 @@ var db = require('./db');
 var qr = require('qr-image');
 var fs = require('fs');
 
+var PriceInterval = 30.0;
+
 function checkLogin(req, res){
 	if (!req.session.user){
 		res.redirect('/login');
@@ -281,6 +283,8 @@ exports.removePresent = function(req, res){
 	res.redirect('/admin');
 }
 
+
+
 exports.invitation = function(req, res){
 	db.preUse();
 	var p_id = req.param('id');
@@ -294,12 +298,28 @@ exports.invitation = function(req, res){
 				res.send(404);
 				return;
 			}
+			var invitee = result1[0];
+			var presentsToBeSelected=[];
 			//DONE: just add not assigned presents here.
 			db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err2, result2){ // all presents not assigned.
 				if(!err2){
+					if ('dinner' == invitee.actType){
+						for (var i = 0; i < result2.length; i++){
+							if (PriceInterval <= result2[i].price){
+								presentsToBeSelected.push(result2[i]);
+							}
+						}
+					}
+					else{
+						for (var i = 0; i < result2.length; i++){
+							if (PriceInterval >= result2[i].price){
+								presentsToBeSelected.push(result2[i]);
+							}
+						}
+					}
 					db.Db.collection("presents").find({inviteeId: p_id}, function(err3, result3){ // find the present assigned to this invitee.
 						if(!err3){
-							return res.render('invitation', {invitee: result1[0], presents: result2, present: result3} );
+							return res.render('invitation', {invitee: result1[0], presents: presentsToBeSelected, present: result3} );
 						}
 					});
 				}
