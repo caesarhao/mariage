@@ -44,6 +44,11 @@ exports.index = function(req, res){
 exports.admin = function(req, res){
 	checkLogin(req, res);
 	//DONE: get currentInvitees from db.
+	var numInvitees = 0;
+	var numAttendDinner = 0;
+	var numAttendDinnerCouples = 0;
+	var numAttendBarbcue = 0;
+	var numAttendBarbcueCouples = 0;
 	db.preUse();
 	db.Db.collection("invitees").find({}, function(err1, result1){
 		db.Db.collection("presents").find({}, function(err2, result2){
@@ -58,8 +63,32 @@ exports.admin = function(req, res){
 						}
 					}
 				}
+				// count numbers
+				if ('dinner' == result1[i].actType){
+					if (0 < result1[i].buddy.length){
+						numAttendDinner += 2;
+						numAttendDinnerCouples += 1;
+						numInvitees += 2;
+					}
+					else{
+						numAttendDinner += 1;
+						numInvitees += 1;
+					}
+				}
+				else{
+					if (0 < result1[i].buddy.length){
+						numAttendBarbcue += 2;
+						numAttendBarbcueCouples += 1;
+						numInvitees += 2;
+					}
+					else{
+						numAttendBarbcue += 1;
+						numInvitees += 1;
+					}
+				}
 			}
-			res.render('admin', {user: req.session.user, invitees: result1, presents:result2});
+			var statisticInfo = {NumInvitees:numInvitees, NumAttendDinner: numAttendDinner, NumAttendDinnerCouples: numAttendDinnerCouples, NumAttendBarbcue: numAttendBarbcue, NumAttendBarbcueCouples: numAttendBarbcueCouples};
+			res.render('admin', {user: req.session.user, invitees: result1, presents:result2, StatisticInfo: statisticInfo});
 		});
 	});
 }
