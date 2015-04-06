@@ -8,7 +8,7 @@
   	<title>Invitation</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="invitation.css">
-	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+	<!-- <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css"> -->
 
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
@@ -23,9 +23,11 @@
            
            if ('ZH' == '<%= invitee.lang %>'){
            		$(".langFR").addClass('hide').show();
+           		$('body').css('font-family', 'HuaWenXingKai');
            }
            else{
            		$(".langZH").addClass('hide').show();
+           		$('body').css('font-family', 'Cookie-Regular');
            }
            
            if (0 < <%= present.length %>){

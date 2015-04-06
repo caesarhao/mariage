@@ -1,4 +1,12 @@
 /* Invitation */
+@font-face {
+    font-family: Cookie-Regular;
+    src: url(Cookie-Regular.ttf);
+}
+@font-face {
+    font-family: HuaWenXingKai;
+    src: url(HuaWenXingKai.ttf);
+}
 
 body{
     overflow:hidden;
@@ -14,7 +22,7 @@ h2{
 }
 /*h3 h4 chinese font (left right), h5 h6 p for letter font*/
 h3{
-	font: 400 30px '楷体',sans-serif;
+	font: 400 30px 'HuaWenXingKai',sans-serif;
 	color: #104E8B;
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1); 
 }
@@ -29,7 +37,7 @@ h5{
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1);
 }
 p{
-	font: 400 33px/0.8 'Cookie', Calibri, Arial,sans-serif;
+	//font: 400 33px/0.8 'Cookie', Calibri, Arial,sans-serif;
 	color: #104E8B;
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1); 
 	
