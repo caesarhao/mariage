@@ -43,6 +43,7 @@
              
     	});
     </script>
+    
 </head>
 <body>
 	<div class="flipbook">
@@ -101,7 +102,7 @@
 											<option value='<%= presents[i]._id %>'><%= 'ZH' == invitee.lang ? presents[i].nameZH:presents[i].nameFR %> (<%= presents[i].price %> €)</option>
 										<% } %>
 									</select>
-									<button type="submit" value="Ok" class="button tick col-md-3 col-md-offset-1" > </button>
+									<button type="submit" value="Ok" class="button tick col-md-3 col-md-offset-1" onclick="return confirm('<%= 'ZH' == invitee.lang ? "确定为我们选择该礼物？":"Voulez-vous choisir ce cadeau?" %>')"> </button>
 								</div>
 							</form>
 						</div>
