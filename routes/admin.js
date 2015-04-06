@@ -5,8 +5,6 @@ var db = require('./db');
 var qr = require('qr-image');
 var fs = require('fs');
 
-var PriceInterval = 30.0;
-
 function checkLogin(req, res){
 	if (!req.session.user){
 		res.redirect('/login');
@@ -50,45 +48,54 @@ exports.admin = function(req, res){
 	var numAttendBarbcue = 0;
 	var numAttendBarbcueCouples = 0;
 	db.preUse();
-	db.Db.collection("invitees").find({}, function(err1, result1){
-		db.Db.collection("presents").find({}, function(err2, result2){
-			for (var i = 0; i<result1.length; i++){
-				if (result1[i].hasOwnProperty('presentId')){
-					for (var j = 0; j<result2.length; j++){
-						if (result2[j]._id == result1[i].presentId){
-							result1[i].presentNameFR = result2[j].nameFR;
-							result1[i].presentNameZH = result2[j].nameZH;
-							result2[j].inviteeName = result1[i].lastname + ' ' + result1[i].firstname;
-							break;
+	db.Db.collection("configuration").find({name: 'PriceInterval'}, function(err0, result0){
+		db.Db.collection("invitees").find({}, function(err1, result1){
+			db.Db.collection("presents").find({}, function(err2, result2){
+				for (var i = 0; i<result1.length; i++){
+					if (result1[i].hasOwnProperty('presentId')){
+						for (var j = 0; j<result2.length; j++){
+							if (result2[j]._id == result1[i].presentId){
+								result1[i].presentNameFR = result2[j].nameFR;
+								result1[i].presentNameZH = result2[j].nameZH;
+								result2[j].inviteeName = result1[i].lastname + ' ' + result1[i].firstname;
+								break;
+							}
+						}
+					}
+					// count numbers
+					if ('dinner' == result1[i].actType){
+						if (0 < result1[i].buddy.length){
+							numAttendDinner += 2;
+							numAttendDinnerCouples += 1;
+							numInvitees += 2;
+						}
+						else{
+							numAttendDinner += 1;
+							numInvitees += 1;
+						}
+					}
+					else{
+						if (0 < result1[i].buddy.length){
+							numAttendBarbcue += 2;
+							numAttendBarbcueCouples += 1;
+							numInvitees += 2;
+						}
+						else{
+							numAttendBarbcue += 1;
+							numInvitees += 1;
 						}
 					}
 				}
-				// count numbers
-				if ('dinner' == result1[i].actType){
-					if (0 < result1[i].buddy.length){
-						numAttendDinner += 2;
-						numAttendDinnerCouples += 1;
-						numInvitees += 2;
-					}
-					else{
-						numAttendDinner += 1;
-						numInvitees += 1;
-					}
+				var priceInterval = 0;
+				if (1 > result0.length){
+					priceInterval = 45;
 				}
 				else{
-					if (0 < result1[i].buddy.length){
-						numAttendBarbcue += 2;
-						numAttendBarbcueCouples += 1;
-						numInvitees += 2;
-					}
-					else{
-						numAttendBarbcue += 1;
-						numInvitees += 1;
-					}
+					priceInterval = result0[0].value;
 				}
-			}
-			var statisticInfo = {NumInvitees:numInvitees, NumAttendDinner: numAttendDinner, NumAttendDinnerCouples: numAttendDinnerCouples, NumAttendBarbcue: numAttendBarbcue, NumAttendBarbcueCouples: numAttendBarbcueCouples};
-			res.render('admin', {user: req.session.user, invitees: result1, presents:result2, StatisticInfo: statisticInfo});
+				var statisticInfo = {NumInvitees:numInvitees, NumAttendDinner: numAttendDinner, NumAttendDinnerCouples: numAttendDinnerCouples, NumAttendBarbcue: numAttendBarbcue, NumAttendBarbcueCouples: numAttendBarbcueCouples};
+				res.render('admin', {user: req.session.user, PriceInterval: priceInterval, invitees: result1, presents:result2, StatisticInfo: statisticInfo});
+			});
 		});
 	});
 }
@@ -312,7 +319,22 @@ exports.removePresent = function(req, res){
 	res.redirect('/admin');
 }
 
-
+exports.setPriceInterval = function(req, res){
+	checkLogin(req, res);
+	db.preUse();
+	var p_priceInterval = req.param('priceinterval');
+	db.Db.collection("configuration").findAndModify(
+		{
+    		query: { name: 'PriceInterval' },
+    		update: { $set: { value: Number(p_priceInterval) } },
+    		new: true, // return the modified one.
+    		upsert: true // if not found, create one.
+		},
+		function(err, doc, lastErrorObject){
+    		res.redirect('/admin');
+		}
+	);
+}
 
 exports.invitation = function(req, res){
 	db.preUse();
@@ -321,43 +343,49 @@ exports.invitation = function(req, res){
 		res.send(404);
 		return;
 	}
-	db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err1, result1){
-		if(!err1){
-			if (1 > result1.length){
+	db.Db.collection("configuration").find({name: "PriceInterval"}, function(err0, result0){
+		db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err1, result1){
+			if(!err1){
+				if (1 > result1.length){
+					res.send(404);
+					return;
+				}
+				var invitee = result1[0];
+				var PriceInterval = 45;
+				if (0 < result0.length){
+					PriceInterval = result0[0].value;
+				}
+				var presentsToBeSelected=[];
+				//DONE: just add not assigned presents here.
+				db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err2, result2){ // all presents not assigned.
+					if(!err2){
+						if ('dinner' == invitee.actType){
+							for (var i = 0; i < result2.length; i++){
+								if (PriceInterval <= result2[i].price){
+									presentsToBeSelected.push(result2[i]);
+								}
+							}
+						}
+						else{
+							for (var i = 0; i < result2.length; i++){
+								if (PriceInterval >= result2[i].price){
+									presentsToBeSelected.push(result2[i]);
+								}
+							}
+						}
+						db.Db.collection("presents").find({inviteeId: p_id}, function(err3, result3){ // find the present assigned to this invitee.
+							if(!err3){
+								return res.render('invitation', {invitee: result1[0], presents: presentsToBeSelected, present: result3} );
+							}
+						});
+					}
+				});
+			}
+			else{
 				res.send(404);
 				return;
 			}
-			var invitee = result1[0];
-			var presentsToBeSelected=[];
-			//DONE: just add not assigned presents here.
-			db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err2, result2){ // all presents not assigned.
-				if(!err2){
-					if ('dinner' == invitee.actType){
-						for (var i = 0; i < result2.length; i++){
-							if (PriceInterval <= result2[i].price){
-								presentsToBeSelected.push(result2[i]);
-							}
-						}
-					}
-					else{
-						for (var i = 0; i < result2.length; i++){
-							if (PriceInterval >= result2[i].price){
-								presentsToBeSelected.push(result2[i]);
-							}
-						}
-					}
-					db.Db.collection("presents").find({inviteeId: p_id}, function(err3, result3){ // find the present assigned to this invitee.
-						if(!err3){
-							return res.render('invitation', {invitee: result1[0], presents: presentsToBeSelected, present: result3} );
-						}
-					});
-				}
-			});
-		}
-		else{
-			res.send(404);
-			return;
-		}
+		});
 	});
 };
 

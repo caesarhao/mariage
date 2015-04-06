@@ -152,6 +152,7 @@ var SampleApp = function() {
         self.app.post('/addInvitee', admin.addInvitee);
         self.app.post('/addPresent', admin.addPresent);
         self.app.post('/assignPresent', admin.assignPresent);
+        self.app.post('/setPriceInterval', admin.setPriceInterval);
         
         
     };
