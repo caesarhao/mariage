@@ -32,12 +32,44 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Configuration</h2>
+					<h2>Configuration of Price Intervals</h2>
 					<form class="form-inline" method="post" action="/setPriceInterval">
 						<div class="form-group">
-							<label for="priceinterval">PriceInterval</label>
-							<input type="number" id="priceinterval" class="form-control" name="priceinterval" min='0' step='0.01' value=<%= PriceInterval %> required>
+							<label for="intvlSingleDinnerMin">Single Dinner Min</label>
+							<input type="number" id="intvlSingleDinnerMin" class="form-control" name="intvlSingleDinnerMin" min='0' step='0.01' value=<%= PriceIntervals.intvlSingleDinnerMin %> required>
 						</div>
+						<div class="form-group">
+							<label for="intvlSingleDinnerMax">Single Dinner Max</label>
+							<input type="number" id="intvlSingleDinnerMax" class="form-control" name="intvlSingleDinnerMax" min='0' step='0.01' value=<%= PriceIntervals.intvlSingleDinnerMax %> required>
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="intvlDoubleDinnerMin">Double Dinner Min</label>
+							<input type="number" id="intvlDoubleDinnerMin" class="form-control" name="intvlDoubleDinnerMin" min='0' step='0.01' value=<%= PriceIntervals.intvlDoubleDinnerMin %> required>
+						</div>
+						<div class="form-group">
+							<label for="intvlDoubleDinnerMax">Double Dinner Max</label>
+							<input type="number" id="intvlDoubleDinnerMax" class="form-control" name="intvlDoubleDinnerMax" min='0' step='0.01' value=<%= PriceIntervals.intvlDoubleDinnerMax %> required>
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="intvlSingleBarbecueMin">Single Barbecue Min</label>
+							<input type="number" id="intvlSingleBarbecueMin" class="form-control" name="intvlSingleBarbecueMin" min='0' step='0.01' value=<%= PriceIntervals.intvlSingleBarbecueMin %> required>
+						</div>
+						<div class="form-group">
+							<label for="intvlSingleBarbecueMax">Single Barbecue Max</label>
+							<input type="number" id="intvlSingleBarbecueMax" class="form-control" name="intvlSingleBarbecueMax" min='0' step='0.01' value=<%= PriceIntervals.intvlSingleBarbecueMax %> required>
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="intvlDoubleBarbecueMin">Double Barbecue Min</label>
+							<input type="number" id="intvlDoubleBarbecueMin" class="form-control" name="intvlDoubleBarbecueMin" min='0' step='0.01' value=<%= PriceIntervals.intvlDoubleBarbecueMin %> required>
+						</div>
+						<div class="form-group">
+							<label for="intvlDoubleBarbecueMax">Double Barbecue Max</label>
+							<input type="number" id="intvlDoubleBarbecueMax" class="form-control" name="intvlDoubleBarbecueMax" min='0' step='0.01' value=<%= PriceIntervals.intvlDoubleBarbecueMax %> required>
+						</div>
+						<br>
 						<input type="submit" value="Modify">
 					</form>
 				</div>

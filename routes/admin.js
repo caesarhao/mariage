@@ -48,7 +48,7 @@ exports.admin = function(req, res){
 	var numAttendBarbcue = 0;
 	var numAttendBarbcueCouples = 0;
 	db.preUse();
-	db.Db.collection("configuration").find({name: 'PriceInterval'}, function(err0, result0){
+	db.Db.collection("configuration").find({name: 'PriceIntervals'}, function(err0, result0){
 		db.Db.collection("invitees").find({}, function(err1, result1){
 			db.Db.collection("presents").find({}, function(err2, result2){
 				for (var i = 0; i<result1.length; i++){
@@ -86,15 +86,24 @@ exports.admin = function(req, res){
 						}
 					}
 				}
-				var priceInterval = 0;
+				var priceIntervals;
 				if (1 > result0.length){
-					priceInterval = 45;
+					priceIntervals = {name: 'PriceIntervals',
+									intvlSingleDinnerMin: 30,
+									intvlSingleDinnerMax: 60,
+									intvlDoubleDinnerMin: 50,
+									intvlDoubleDinnerMax: 120,
+									intvlSingleBarbecueMin: 10,
+									intvlSingleBarbecueMax: 50,
+									intvlDoubleBarbecueMin: 30,
+									intvlDoubleBarbecueMax: 60
+									};
 				}
 				else{
-					priceInterval = result0[0].value;
+					priceIntervals = result0[0];
 				}
 				var statisticInfo = {NumInvitees:numInvitees, NumAttendDinner: numAttendDinner, NumAttendDinnerCouples: numAttendDinnerCouples, NumAttendBarbcue: numAttendBarbcue, NumAttendBarbcueCouples: numAttendBarbcueCouples};
-				res.render('admin', {user: req.session.user, PriceInterval: priceInterval, invitees: result1, presents:result2, StatisticInfo: statisticInfo});
+				res.render('admin', {user: req.session.user, PriceIntervals: priceIntervals, invitees: result1, presents:result2, StatisticInfo: statisticInfo});
 			});
 		});
 	});
@@ -322,11 +331,27 @@ exports.removePresent = function(req, res){
 exports.setPriceInterval = function(req, res){
 	checkLogin(req, res);
 	db.preUse();
-	var p_priceInterval = req.param('priceinterval');
+	var p_intvlSingleDinnerMin = req.param('intvlSingleDinnerMin');
+	var p_intvlSingleDinnerMax = req.param('intvlSingleDinnerMax');
+	var p_intvlDoubleDinnerMin = req.param('intvlDoubleDinnerMin');
+	var p_intvlDoubleDinnerMax = req.param('intvlDoubleDinnerMax');
+	var p_intvlSingleBarbecueMin = req.param('intvlSingleBarbecueMin');
+	var p_intvlSingleBarbecueMax = req.param('intvlSingleBarbecueMax');
+	var p_intvlDoubleBarbecueMin = req.param('intvlDoubleBarbecueMin');
+	var p_intvlDoubleBarbecueMax = req.param('intvlDoubleBarbecueMax');
+	
 	db.Db.collection("configuration").findAndModify(
 		{
-    		query: { name: 'PriceInterval' },
-    		update: { $set: { value: Number(p_priceInterval) } },
+    		query: { name: 'PriceIntervals' },
+    		update: { $set: { intvlSingleDinnerMin: Number(p_intvlSingleDinnerMin),
+    						  intvlSingleDinnerMax: Number(p_intvlSingleDinnerMax),
+    						  intvlDoubleDinnerMin: Number(p_intvlDoubleDinnerMin),
+    						  intvlDoubleDinnerMax: Number(p_intvlDoubleDinnerMax),
+    						  intvlSingleBarbecueMin: Number(p_intvlSingleBarbecueMin),
+    						  intvlSingleBarbecueMax: Number(p_intvlSingleBarbecueMax),
+    						  intvlDoubleBarbecueMin: Number(p_intvlDoubleBarbecueMin),
+    						  intvlDoubleBarbecueMax: Number(p_intvlDoubleBarbecueMax)
+    		 } },
     		new: true, // return the modified one.
     		upsert: true // if not found, create one.
 		},
@@ -343,7 +368,7 @@ exports.invitation = function(req, res){
 		res.send(404);
 		return;
 	}
-	db.Db.collection("configuration").find({name: "PriceInterval"}, function(err0, result0){
+	db.Db.collection("configuration").find({name: "PriceIntervals"}, function(err0, result0){
 		db.Db.collection("invitees").find({_id: db.ObjectId(p_id)}, function(err1, result1){
 			if(!err1){
 				if (1 > result1.length){
@@ -351,25 +376,40 @@ exports.invitation = function(req, res){
 					return;
 				}
 				var invitee = result1[0];
-				var PriceInterval = 45;
-				if (0 < result0.length){
-					PriceInterval = result0[0].value;
-				}
+				var PriceIntervals = result0[0];
 				var presentsToBeSelected=[];
 				//DONE: just add not assigned presents here.
 				db.Db.collection("presents").find({inviteeId:{$exists:false}}, function(err2, result2){ // all presents not assigned.
 					if(!err2){
-						if ('dinner' == invitee.actType){
-							for (var i = 0; i < result2.length; i++){
-								if (PriceInterval <= result2[i].price){
-									presentsToBeSelected.push(result2[i]);
+						if ('dinner' == invitee.actType){ // dinner
+							if (0 < invitee.buddy.length){
+								for (var i = 0; i < result2.length; i++){
+									if (PriceIntervals.intvlDoubleDinnerMin <= result2[i].price && PriceIntervals.intvlDoubleDinnerMax >= result2[i].price){
+										presentsToBeSelected.push(result2[i]);
+									}
+								}
+							}
+							else{
+								for (var i = 0; i < result2.length; i++){
+									if (PriceIntervals.intvlSingleDinnerMin <= result2[i].price && PriceIntervals.intvlSingleDinnerMax >= result2[i].price){
+										presentsToBeSelected.push(result2[i]);
+									}
 								}
 							}
 						}
-						else{
-							for (var i = 0; i < result2.length; i++){
-								if (PriceInterval >= result2[i].price){
-									presentsToBeSelected.push(result2[i]);
+						else{ // barbecue
+							if (0 < invitee.buddy.length){
+								for (var i = 0; i < result2.length; i++){
+									if (PriceIntervals.intvlDoubleBarbecueMin <= result2[i].price && PriceIntervals.intvlDoubleBarbecueMax >= result2[i].price){
+										presentsToBeSelected.push(result2[i]);
+									}
+								}
+							}
+							else{
+								for (var i = 0; i < result2.length; i++){
+									if (PriceIntervals.intvlSingleBarbecueMin <= result2[i].price && PriceIntervals.intvlSingleBarbecueMax >= result2[i].price){
+										presentsToBeSelected.push(result2[i]);
+									}
 								}
 							}
 						}
