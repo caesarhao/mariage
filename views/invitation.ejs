@@ -76,9 +76,9 @@
 								</p><br>
 								<p>A l'issue de la cérémonie, les familles auront le plaisir de vous accueillir pour  
 								<% if("dinner" == invitee.actType) {%>
-								un vin d'honneur et un dîner servis au Château de la Vère de Larroque à partir de 18h00 le même jour.
+								un vin d'honneur et un dîner servis au Château de la Vère à Larroque à partir de 18h00.
 								<% } else{ %>
-								un barbecue au Château de la Vère de Larroque à partir de 11h00 le jour suivant.
+								un barbecue au Château de la Vère à Larroque à partir de 11h00 le jour suivant.
 								<% } %>
 								</p>
 							</div>
@@ -110,8 +110,8 @@
 						</div>
 						<div id="showPresent" class="col-md-12">
 							<br>
-							<h5 class="langZH">您已经为我们选择礼物:</h5>
-							<h5 class="langFR">Vous avez choisi le cadeau pour nous.</h5>
+							<h5 class="langZH">您已经为我们选择礼物.谢谢！</h5>
+							<h5 class="langFR">Vous avez choisi ce cadeau pour nous. nous vous remercions! </h5>
 							<p>
 								<% if(0 < present.length) {%>
 									<%= 'ZH' == invitee.lang ? present[0].nameZH:present[0].nameFR %> (<%= present[0].price %> €)
