@@ -235,8 +235,10 @@ th{
     background: transparent;
 }
 
-
-
+#giftablebody {
+	height: 100%;
+    overflow-y: auto;
+}
 
 ul.countdown {
 list-style: none;
