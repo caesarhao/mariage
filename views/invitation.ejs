@@ -30,16 +30,17 @@
            		$('body').css('font-family', 'Cookie-Regular');
            }
            
-           if (0 < <%= present.length %>){
+           if('barbecue' == '<%= invitee.actType %>'){ // attend only barbecue, no need to select present.
            		$("#selectPresent").addClass('hide').show();
-			
-           }
-           else if('dinner' == '<%invitee.actType%>'){
            		$("#showPresent").addClass('hide').show();
            }
-		   else {
-				$("#selectPresent").addClass('hide').show();
-				$("#showPresent").addClass('hide').show();
+           else{ // attend dinner.
+           		if (0 < <%= present.length %>){ // already selected present.
+           			$("#selectPresent").addClass('hide').show();
+           		}
+			   else{ // need to select present.
+			   		$("#showPresent").addClass('hide').show();
+			   }
 		   }
     	});
     	$(document).bind('keydown', function(e){ 
