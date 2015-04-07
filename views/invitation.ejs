@@ -32,10 +32,15 @@
            
            if (0 < <%= present.length %>){
            		$("#selectPresent").addClass('hide').show();
+			
            }
-           else{
+           else if("dinner" == invitee.actType){
            		$("#showPresent").addClass('hide').show();
            }
+		   else ("dinner" == invitee.actType){
+				$("#selectPresent").addClass('hide').show();
+				$("#showPresent").addClass('hide').show();
+		   }
     	});
     	$(document).bind('keydown', function(e){ 
         	if (e.keyCode==37)
