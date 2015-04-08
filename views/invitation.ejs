@@ -29,7 +29,9 @@
            		$(".langZH").addClass('hide').show();
            		$('body').css('font-family', 'Cookie-Regular');
            }
-           
+		   $("#selectPresent").addClass('hide').show();
+           $("#showPresent").addClass('hide').show();
+           /*
            if('barbecue' == '<%= invitee.actType %>'){ // attend only barbecue, no need to select present.
            		$("#selectPresent").addClass('hide').show();
            		$("#showPresent").addClass('hide').show();
@@ -41,7 +43,7 @@
 			   else{ // need to select present.
 			   		$("#showPresent").addClass('hide').show();
 			   }
-		   }
+		   }*/
     	});
     	$(document).bind('keydown', function(e){ 
         	if (e.keyCode==37)
