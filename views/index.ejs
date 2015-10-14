@@ -230,7 +230,7 @@
 				<div class="col-md-5 col-md-offset-1" id="#testslide">
 				
 					<img src="jingPortait.png" class="img-circle">
-					<br><br><br>
+					<br><br><br><br><br>
 					<p class="langFR">
 						Jing vient de Province de Hebei, Handan. Elle est dotée un prénom qui signfie "calme" en chinois mais elle adore bouger et les sports.
 					</p>
@@ -244,7 +244,7 @@
 				<div class="col-md-5">
 				
 					<img src="haoPortait.png" class="img-circle">
-					<br><br><br>
+					<br><br><br><br><br>
 					<p class="langFR">
 						Hao vient de Province de Shandong, Guangrao. Il était trempé dans l'ambiance de Confucius et est fort en le changement du "calme" au "mouvement"
 					</p>
@@ -309,7 +309,7 @@
 					</div>
 					<div class="col-md-6">
 						<p class="langFR">
-							L'année 2011. Jing est revenue à SJTU pour poursuivre ses études, et Hao a couru après son ancien rêve. Ils se étaient retrouvés et ils ont gardé le vrai nom de l'un et l'autre. Hao a pris son plus grand courage pour prendre la main de Jing dans la sienne, en poursuivant leur rêve. Chaque week-end ils s'étaient retrouvés à SJTU dans le labo, jouaient matlab, regardaient 'Mentalist' et 'Nikita', et Hao préparait l'examen de GEM.
+							L'année 2011. Jing est revenue à SJTU pour poursuivre ses études, et Hao a couru après son ancien rêve. Ils s'étaient retrouvés et ils ont gardé le vrai nom de l'un et l'autre. Hao a pris son plus grand courage pour prendre la main de Jing dans la sienne, en poursuivant leur rêve. Chaque week-end ils s'étaient retrouvés à SJTU dans le labo, jouaient matlab, regardaient 'Mentalist' et 'Nikita', et Hao préparait l'examen de GEM.
 						</p>
 						<p class="langZH">
 							2011年，Jing回到了交大，Hao也回到了交大。Jing继续她的学业，Hao去寻找他曾经的梦想。 
@@ -331,7 +331,7 @@
 					</div>
 					<div class="col-md-6">
 						<p class="langFR">
-							Enfin, Jing est diplomé! En 2012, elle a réçu ses 3 diplomes et était plus diplomé que de lycéé. 
+						Enfin, Jing est diplômé! En 2012, elle a reçu ses 3 diplômes et était plus diplômé que de lycée.
 						</p>
 						<p class="langZH">
 							2012年，陪伴你坐在思源湖边，一起毕业。
@@ -350,7 +350,7 @@
 					</div>
 					<div class="col-md-6">
 						<p class="langFR">
-							Octobre 2012, après tous les revers sinueux que Hao a l'habitude, ils ont réussi de se rencontrer à Paris! Ils ont decouvert les petits et les grands rues partout en Europe.
+							Octobre 2012, après tous les revers sinueux que Hao a l'habitude, ils ont réussi de se rencontrer à Paris! Ils ont découvert les petites et les grandes rues partout en Europe.
 						</p>
 						<p class="langZH">
 							2012年10月 <br> "经历过无数让我习以为常的波折后，我们成功在巴黎会师啦! 我们一起行走欧洲，温暖的气氛在周围荡漾。" --Hao
@@ -415,7 +415,7 @@
 			
 				<div class="col-md-6 col-md-offset-1">
 					<h6 class="langFR">
-						L'histoire continue. Désormais, c'est un nouveau chapitre avec la passion et pleins d'amours!
+						L'histoire continue. Désormais, c'est un nouveau chapitre avec la passion et plein d'amours!
 					</h6>
 					<h6 class="langZH">
 						我们的故事还在继续。		
@@ -447,6 +447,40 @@
 				</div>
 			</div>
 		</div>
+
+		<!--div class="slide" id="slide_dinner">
+			<div class="container-fluid">
+				<div class="row">
+				
+					
+					<div class="col-md-5">
+						<img src="chateau.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-4 col-md-offset-2 langZH">
+						<img src="reception_cn.png" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-4 col-md-offset-2 langFR">
+						<img src="reception_fr.png" class="img-rounded img-responsive">
+					</div>
+					
+					
+									
+				</div>
+			</div>
+		</div -->
+		<div class="slide" id="slide_barbecue">
+			<div class="container-fluid">
+				<div class="row">
+			
+					<div class="col-md-4 col-md-offset-4 langZH">
+						<img src="reception2_cn.png" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-4 col-md-offset-4 langFR">
+						<img src="reception2_fr.png" class="img-rounded img-responsive">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="slide" id="slide_cadeaux">
 			<div class="container-fluid">
 				<div class="row">
@@ -460,11 +494,11 @@
 					</div>
 					<div class="col-md-3 langFR">
 						<img src="darty_fr.png" class="img-rounded img-responsive">
-					</div>
+					</div >
 					
-					<div class="col-md-6">
+					<!--div class="col-md-6">
 						<h2 class="langFR">Liste des Cadeaux</h2>
-						<h2 class="langZH">礼物清单</h2>
+						<h2 class="langZH">礼物单</h2>
 						<table class="table table-bordered" id="giftable">
 							<thead>
 								<tr class="active">
@@ -476,7 +510,7 @@
 									<th class="langZH">价格</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="giftablebody">
 								<% for(var i=0; i<presents.length; i++) { %>
 									<tr class="warning">
 										<td  class="langZH"><%= presents[i].nameZH %></td>
@@ -487,6 +521,7 @@
 								<% } %>
 							</tbody>
 						</table>
+<<<<<<< HEAD
 					</div>
 				</div>
 			</div>
@@ -520,6 +555,9 @@
 					<div class="col-md-4 col-md-offset-4 langFR">
 						<img src="reception2_fr.png" class="img-rounded img-responsive">
 					</div>
+=======
+					</div-->
+>>>>>>> 2061185e8c7679b92aa18eb661460da86e86cb2e
 				</div>
 			</div>
 		</div>

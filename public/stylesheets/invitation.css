@@ -25,6 +25,7 @@ h3{
 	font: 400 30px 'HuaWenXingKai',sans-serif;
 	color: #104E8B;
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1); 
+	text-align:justify;
 }
 h4{
 	font: 400 26px '黑体',sans-serif;
@@ -35,11 +36,13 @@ h5{
 	font: 400 0.8em/0.8 Calibri,Arial,sans-serif;
 	color: #104E8B;
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1);
+	text-align:justify;
 }
 p{
 	//font: 400 33px/0.8 'Cookie', Calibri, Arial,sans-serif;
 	color: #104E8B;
 	text-shadow: 4px 4px 3px rgba(96,123,139,0.1); 
+	text-align:justify;
 	
 }
 
