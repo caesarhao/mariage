@@ -17,12 +17,12 @@
     };
 
     // Store the result in the element
-    cdays.innerHTML = ~ ~remainingTime["days"];
+    cdays.text (~ ~remainingTime["days"]);
 	chours.innerHTML = ~ ~remainingTime["hours"];
 	cminutes.innerHTML = ~ ~remainingTime["minutes"];
 	cseconds.innerHTML = ~ ~remainingTime["seconds"];
 	
-	
+	         
  }
 
  // Update the timer every 1 second
