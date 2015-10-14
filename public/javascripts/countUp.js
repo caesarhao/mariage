@@ -1,5 +1,5 @@
  function countup(){
-	 alert("begin");
+	
     // Get the element to append to
     var cdays = $('.days');
 	var chours = $('.hours');
@@ -17,11 +17,12 @@
     };
 
     // Store the result in the element
-    cdays.innerHTML = ~ ~remainingTime[0];
-	chours.innerHTML = ~ ~remainingTime[1];
-	cminutes.innerHTML = ~ ~remainingTime[2];
-	cseconds.innerHTML = ~ ~remainingTime[3];
-	alert("end");
+    cdays.innerHTML = ~ ~remainingTime["days"];
+	chours.innerHTML = ~ ~remainingTime["hours"];
+	cminutes.innerHTML = ~ ~remainingTime["minutes"];
+	cseconds.innerHTML = ~ ~remainingTime["seconds"];
+	
+	
  }
 
  // Update the timer every 1 second
