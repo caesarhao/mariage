@@ -8,7 +8,7 @@
     // Set the targetDate
     var targetDate = new Date("May 12, 2011 20:00:00");
 
-    var remainingSeconds = ~ ~((targetDate - new Date()) / 1000);
+    var remainingSeconds =Math.abs( ~ ~((targetDate - new Date()) / 1000));
     var remainingTime = {
         "days": remainingSeconds / (60 * 60 * 24),
         "hours": (remainingSeconds % (60 * 60 * 24)) / (60 * 60),
@@ -18,9 +18,9 @@
 
     // Store the result in the element
     cdays.text (~ ~remainingTime["days"]);
-	chours.innerHTML = ~ ~remainingTime["hours"];
-	cminutes.innerHTML = ~ ~remainingTime["minutes"];
-	cseconds.innerHTML = ~ ~remainingTime["seconds"];
+	chours.text (~ ~remainingTime["hours"]);
+	cminutes.text(~ ~remainingTime["minutes"]);
+	cseconds.text(~ ~remainingTime["seconds"]);
 	
 	         
  }
