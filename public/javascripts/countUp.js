@@ -19,7 +19,7 @@
     cdays.innerHTML = ~ ~remainingTime[0];
 	chours.innerHTML = ~ ~remainingTime[1];
 	cminutes.innerHTML = ~ ~remainingTime[2];
-	seconds.innerHTML = ~ ~remainingTime[3];
+	cseconds.innerHTML = ~ ~remainingTime[3];
  }
 
  // Update the timer every 1 second
