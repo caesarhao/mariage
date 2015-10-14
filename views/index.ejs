@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
 	<script type="text/javascript" src="jquery.downCount.js"></script>
+	<script type="text/javascript" src="countUp.js"></script>
 	<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script> -->
 	
 	<script type="text/javascript">
@@ -87,17 +88,20 @@
 		});
 	</script>
 	<script type="text/javascript">
-        $(document).ready(function() {
-        	$('.countdown').countTo({
-            	date: '05/12/2011 20:00:00',
+     /*   $(document).ready(function() {
+        	$('.countdown').downCount({
+            	date: '05/02/2015 15:00:00',
             	offset: 0
         		});
-        });
+        });*/
+
+
     </script>
 	<script>
 		// Using multiple unit types within one animation.
 		 
 		$( document ).ready(function() {
+		countup();
 		  $( "#block" ).animate({
 			width: "90%",
 			marginLeft: "1.5in",
