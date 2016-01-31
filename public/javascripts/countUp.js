@@ -8,23 +8,32 @@
 	var cminutes = $('.minutes');
     var cseconds = $('.seconds');
     // Set the targetDate
-    var targetDate = new Date("May 12, 2011 20:00:00");
+    var targetDate = new Date("May 2, 2015 15:00:00");
 
-    var remainingSeconds =Math.abs( ~ ~((targetDate - new Date()) / 1000));
-    var remainingTime = {
-        "days": remainingSeconds / (60 * 60 * 24),
-        "hours": (remainingSeconds % (60 * 60 * 24)) / (60 * 60),
-        "minutes": (remainingSeconds % (60 * 60)) / 60,
-        "seconds": remainingSeconds % 60
-    };
+	function count(){
+		 var remainingSeconds =Math.abs( ~ ~((targetDate - new Date()) / 1000));
+		 var remainingTime = {
+			"days": remainingSeconds / (60 * 60 * 24),
+			"hours": (remainingSeconds % (60 * 60 * 24)) / (60 * 60),
+			"minutes": (remainingSeconds % (60 * 60)) / 60,
+			"seconds": remainingSeconds % 60
+		};
 
     // Store the result in the element
-    cdays.text (~ ~remainingTime["days"]);
-	chours.text (~ ~remainingTime["hours"]);
-	cminutes.text(~ ~remainingTime["minutes"]);
-	cseconds.text(~ ~remainingTime["seconds"]);
-	var interval = setInterval(countdown, 1000);
+		cdays.text (~ ~remainingTime["days"]);
+		chours.text (~ ~remainingTime["hours"]);
+		cminutes.text(~ ~remainingTime["minutes"]);
+		cseconds.text(~ ~remainingTime["seconds"]);
+		
+
+	 }
+	 		// start count
+		var interval = setInterval(count, 1000);
+
+
     };
+	
+
 
 })(jQuery);
 	        

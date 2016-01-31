@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
-	<script type="text/javascript" src="jquery.downCount.js"></script>
+	<!--script type="text/javascript" src="jquery.downCount.js"></script-->
 	<script type="text/javascript" src="countUp.js"></script>
 	<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script> -->
 	
@@ -22,7 +22,7 @@
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
 				sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#1bbc9b'],
-				anchors: ['faire-part', 'nous', 'notrechemin', 'programme'],
+				anchors: ['faire-part', 'nous', 'notrechemin', 'programme','now'],
 				menu: '#menu',
 				css3: true,
 				scrollingSpeed: 1000,
@@ -95,7 +95,6 @@
         		});
         });*/
 
-
     </script>
 	<script>
 		// Using multiple unit types within one animation.
@@ -147,7 +146,7 @@
 		</a></li>
 		<li data-menuanchor="nous"><a href="#nous">
 			<div class="langFR">Toi et Moi</div>
-			<div class="langZH">妳和我</div>
+			<div class="langZH">你和我</div>
 			<div class="langEN">You & Me</div>
 		</a></li>
 		<li data-menuanchor="notrechemin"><a href="#notrechemin">
@@ -158,6 +157,11 @@
 		<li data-menuanchor="programme"><a href="#programme">
 			<div class="langFR">Notre cérémonie de mariage</div>
 			<div class="langZH">我们的婚礼</div>
+			<div class="langEN">Schedule</div>
+		</a></li>
+		<li data-menuanchor="now"><a href="#now">
+			<div class="langFR">Photos</div>
+			<div class="langZH">一些照片</div>
 			<div class="langEN">Schedule</div>
 		</a></li>
 	</ul>
@@ -171,25 +175,25 @@
 	
 <div id="fullpage">
 	<div class="section active" id="section1">
-		<div class="container-fluid">
+	<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12" id="block">
-					<h1 class="langFR">Nous nous sommes mariés!</h1>
-					<h1 class="langZH">我们结婚啦！</h1>
+					<h1 class="langFR">Jing&Hao </h1>
+					<h1 class="langZH">小浩浩和小静静</h1>
 					<h1 class="langEN">We are married！</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="langFR">le 2 mai 2015</h3>
-					<h3 class="langZH">于公元2015年5月2日</h3>
+					<h3 class="langFR">Nous nous sommes mariés le 2 mai 2015!</h3>
+					<h3 class="langZH">我们于2015年5月2日结婚啦！</h3>
 					<h3 class="langEN">on May 2nd 2015</h3>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="langFR">ça fait</h3>
-					<h3 class="langZH">在一起已有</h3>
+					<h3 class="langFR">depuis ce jour ça fait</h3>
+					<h3 class="langZH">琴瑟和谐已有</h3>
 					<h3 class="langEN">we've been together for</h3>
 				</div>
 			</div>
@@ -436,70 +440,139 @@
 		
 	</div>
 	<div class="section" id="section4">
-		<div class="slide" id="slide_mairie">
+		<div class="slide" id="slide_home">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-5">
-						<img src="mairie.png" class="img-rounded img-responsive">
+					<div class="col-md-4">
+						<img src="home.jpg" class="img-rounded img-responsive">
 					</div>
-					<div class="col-md-4 langZH">
-						<img src="fond_letter_cn.png" class="img-rounded img-responsive">
+					<div class="col-md-4">
+						<img src="ceremonieMarie.jpg" class="img-rounded img-responsive">
 					</div>
-					<div class="col-md-4 langFR">
-						<img src="fond_letter_fr.png" class="img-rounded img-responsive">
+					<div class="col-md-4">
+						<img src="sortiemarie.jpg" class="img-rounded img-responsive">
 					</div>
+
 				</div>
+				<p class="langFR">
+						Le 2 mai 2015 à 15h, la cérémonie de mariage à la mairie de Castres.
+				</p>
+				<p class="langZH">
+						市政厅结婚典礼
+				</p>
 			</div>
 		</div>
 
-		<!--div class="slide" id="slide_dinner">
+		<div class="slide" id="slide_dinner">
 			<div class="container-fluid">
 				<div class="row">
-				
-					
-					<div class="col-md-5">
-						<img src="chateau.jpg" class="img-rounded img-responsive">
-					</div>
-					<div class="col-md-4 col-md-offset-2 langZH">
-						<img src="reception_cn.png" class="img-rounded img-responsive">
-					</div>
-					<div class="col-md-4 col-md-offset-2 langFR">
+
+					<div class="col-md-4 langFR">
 						<img src="reception_fr.png" class="img-rounded img-responsive">
 					</div>
-					
-					
-									
+					<div class="col-md-4">
+						<img src="chateaudinner.jpg" class="img-rounded img-responsive">
+					</div>			
+					<div class="col-md-4 langZH">
+						<img src="reception_cn.png" class="img-rounded img-responsive">
+					</div>	
+				<p class="langFR">
+						Quelques photos au Château de la Vère à Larroque.
+				</p>
+				<p class="langZH">
+						一些晚宴的照片
+				</p>
+			</div>					
 				</div>
-			</div>
-		</div -->
-		<div class="slide" id="slide_barbecue">
-			<div class="container-fluid">
-				<div class="row">
-			
-					<div class="col-md-4 col-md-offset-4 langZH">
-						<img src="reception2_cn.png" class="img-rounded img-responsive">
-					</div>
-					<div class="col-md-4 col-md-offset-4 langFR">
-						<img src="reception2_fr.png" class="img-rounded img-responsive">
-					</div>
-				</div>
-			</div>
+
 		</div>
+
 		<div class="slide" id="slide_cadeaux">
 			<div class="container-fluid">
 				<div class="row">
 				
 					<div class="col-md-3">
-						<img src="darty.png" class="img-rounded img-responsive">
+						<img src="gift.jpg" class="img-rounded img-responsive">
 					</div>
-					
-					<div class="col-md-3 langZH">
-						<img src="darty_cn.png" class="img-rounded img-responsive">
+					<div class="col-md-3">
+						<p class="langFR">
+							Les cadeaux. Merci à tous et à toute d'être venu(e)s. C'était un très grand plaisir! Merci à notre ami(e)s, pour votre aide!
+						</p>
+						<p class="langZH">
+							馈赠的礼品。谢谢大家的帮助和到来！
+						</p>
 					</div>
-					<div class="col-md-3 langFR">
-						<img src="darty_fr.png" class="img-rounded img-responsive">
-					</div >
-					
+					<div class="col-md-3">
+						<img src="car.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-3">
+						<p class="langFR">
+							Ainsi que le souvenir de ma première voiture：blueTin. Merci de nous prendre pour aller voir le monde.  
+						</p>
+						<p class="langZH">
+							以及纪念我的第一辆车，带着我们走遍南法和意大利，留下很多很多回忆。本照为燕和轩的巧手之成果。
+						</p>
+					</div>
+				</div>
+			</div>						
+		</div>
+
+	</div>
+	<div class="section" id="section5">
+
+		<div class="slide" id="slide1">
+			<div class="container-fluid">
+				<div class="row">
+			
+					<div class="col-md-6">
+						<img src="honeymoon.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-md-4 ">
+						<img src="honeymoon2.jpg" class="img-rounded img-responsive">
+					</div>
+					<p class="langFR">
+						Quelques photos de voyage de noce à l'Île Maurice et la Réunion.
+				    </p>
+				    <p class="langZH">
+						一些毛里求斯蜜月照片
+				    </p>
+				</div>
+			</div>
+		</div>
+			<div class="slide" id="slide2">
+			<div class="container-fluid">
+				<div class="row">
+			
+					<div class="col-md-6 col-md-offset-3">
+						<img src="photographie.jpg" class="img-rounded img-responsive">
+					</div>
+					<p class="langFR">
+						Quelques photos de "cliché". Merci Maman!
+				    </p>
+				    <p class="langZH">
+						一些#必备流程：婚纱照。特别鸣谢妈咪:)
+				    </p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="navbar navbar-fixed-bottom col-md-4 col-md-offset-8">
+	<h4>Designed by Zhanguo</h4>
+	<h4>Powered by node.js, mongoDB, Openshift, Bootstrap</h4>
+	<h4>Copyright © 2015-2016 Zhanguo</h4> 
+</div>
+
+<audio autoplay="true" loop="true">
+	<source src="NeverHappened_sm.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
+
+			
 					<!--div class="col-md-6">
 						<h2 class="langFR">Liste des Cadeaux</h2>
 						<h2 class="langZH">礼物单</h2>
@@ -562,20 +635,6 @@
 =======
 					</div-->
 
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="navbar navbar-fixed-bottom col-md-4 col-md-offset-8">
-	<h4>Designed by Zhanguo</h4>
-	<h4>Powered by node.js, mongoDB, Openshift, Bootstrap</h4>
-	<h4>Copyright © 2015 Zhanguo</h4> 
-</div>
 
-<audio autoplay="true" loop="true">
-	<source src="SunnySideUp+.mp3" type="audio/mpeg">
-</audio>
-</body>
-</html>
-
+					
+	

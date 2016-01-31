@@ -52,7 +52,7 @@
             var difference = target_date - current_date;
 
             // if difference is negative than it's pass the target date
-            if (difference < 0) {
+         /*   if (difference < 0) {
                 // stop timer
                 clearInterval(interval);
 
@@ -61,7 +61,7 @@
 
                 return;
             }
-
+*/
             // basic math variables
             var _second = 1000,
                 _minute = _second * 60,
@@ -69,7 +69,7 @@
                 _day = _hour * 24;
 
             // calculate dates
-            var days = Math.floor(difference / _day),
+            var days = Math.abs(Math.floor(difference / _day)),
                 hours = Math.floor((difference % _day) / _hour),
                 minutes = Math.floor((difference % _hour) / _minute),
                 seconds = Math.floor((difference % _minute) / _second);

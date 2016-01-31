@@ -188,6 +188,11 @@ th{
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+#section5{
+	background-image: url("bg_maurice.jpg");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 #slide8{
 	background-image: url("fond_matin_sm.jpg");
 	background-repeat: no-repeat;
@@ -204,8 +209,8 @@ th{
     background-size: 100% 100%;
 }
 
-#slide_mairie{
-	background-image: url("castres_mairie.jpg");
+#slide_home{
+	background-image: url("jardin2.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -219,7 +224,7 @@ th{
 	background-repeat: no-repeat;
     background-size: 100% 100%;
 }
-#slide_barbecue{
+#slide_photohd{
 	background-image: url("fond_gourjade.jpg");
 	background-repeat: no-repeat;
     background-size: 100% 100%;
