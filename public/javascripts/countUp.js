@@ -8,7 +8,7 @@
 	var cminutes = $('.minutes');
     var cseconds = $('.seconds');
     // Set the targetDate
-    var targetDate = new Date("May 2, 2015 15:00:00");
+    var targetDate = new Date("May 12, 2011 15:00:00");
 
 	function count(){
 		 var remainingSeconds =Math.abs( ~ ~((targetDate - new Date()) / 1000));
